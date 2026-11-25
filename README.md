@@ -71,6 +71,8 @@ page. The content is the same as `strek95.tgz`, which is.
   copyright line.
 - `starbas` source has no separate license file in the remaining tree.
 
+See LICENSE for the terms of each tree in this repository.
+
 ## Build
 
 - **startrek-classic-v1.0** and **startrek-classic-v1.1-cactus-2006**:

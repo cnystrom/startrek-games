@@ -1,0 +1,18 @@
+Licensing in this repository
+
+This repository holds several independent trees. They were published
+under different terms. The header of each file is authoritative.
+
+strek95/
+    GNU General Public License, version 2 or later, as stated in the
+    source headers. The full license text is in strek95/COPYING.
+
+startrek-classic-v1.0/
+startrek-classic-v1.1-cactus-2006/
+niotrek/
+    The C port headers say you may redistribute and modify the program
+    in any way you wish, with no warranty. Star Trek is noted as a
+    trademark of Paramount.
+
+starbas/
+    No license was stated in the original sources.
