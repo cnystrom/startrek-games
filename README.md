@@ -14,16 +14,15 @@ games, kept so those are not duplicated as a second `startrek` repo.
   total re-write in C of the Super Star Trek game from David Ahl's
   *BASIC Computer Games* (1978), with added features such as impulse
   engines, ranks, and sound. Sources are dated 1995. Byte-identical to
-  the `strek95.tgz` recovered from the Wayback Machine.
+  the `strek95.tgz` on the old programs site.
 - **startrek-classic-v1.0/** — Super Star Trek Classic (v1.0), the 1996
   C port as published on cactus.org and as packed in `startrek.tgz`.
-  This tree is byte-identical to the 8 Nov 1997 Wayback capture of
-  `startrek.tgz` and to the copy in the hallie source archive.
+  This tree is byte-identical to the `startrek.tgz` on the old programs
+  site and to the copy in the hallie source archive.
 - **startrek-classic-v1.1-cactus-2006/** — Super Star Trek Classic (v1.1)
-  as it appeared as `startrek.c` on cactus.org in a 13 May 2006 Wayback
-  capture. This is labeled v1.1 in the header, but it is **not** the
-  same file as the already-published GitHub repo (39708 bytes here vs
-  41660 bytes there).
+  as it appeared as `startrek.c` on the old site. This is labeled v1.1
+  in the header, but it is **not** the same file as the already-published
+  GitHub repo (39708 bytes here vs 41660 bytes there).
 - **niotrek/** — An NIO port of Super Star Trek Classic (v1.1),
   copyright 2002, from the hallie source archive. It includes
   `nio_lib.h` and is not a standalone terminal program.
@@ -36,27 +35,28 @@ games, kept so those are not duplicated as a second `startrek` repo.
 ## Origin
 
 `strek95` and the v1.0 classic tree also come from Chris Nystrom's old
-programs page on cactus.org
-(`http://www.cactus.org/~nystrom/programs.html`), and from the related
-Classic Computer Game: Star Trek page (`startrek.html`).
+programs page, and from the related Classic Computer Game: Star Trek
+page (originally on cactus.org):
 
-Programs page capture:
+- https://nystrom.family/chris/old/programs.html
+- https://nystrom.family/chris/old/startrek.html
 
-https://web.archive.org/web/20090106010843/http://outserv.cactus.org/~nystrom/programs.html
+The Star Trek project page is at:
 
-Wayback file captures used:
+https://nystrom.family/chris/startrek/
 
-- https://web.archive.org/web/19971108102613id_/http://www.cactus.org/~nystrom/startrek.tgz
-- https://web.archive.org/web/19971108102622id_/http://www.cactus.org/~nystrom/strek95.tgz
-- https://web.archive.org/web/20060513164933id_/http://www.cactus.org/~nystrom/startrek.c
+Copies of the original downloads are on the old site:
+
+- https://nystrom.family/chris/old/startrek.tgz
+- https://nystrom.family/chris/old/strek95.tgz
+- https://nystrom.family/chris/old/startrek.c
   (the later v1.1 website copy)
 
 `niotrek` and `starbas` are from Chris's personal source archive (the
 hallie tree), posted publicly at his request.
 
-`strek95.tar.gz`, also linked from `startrek.html`, has no successful
-Wayback capture (only 404 responses). The content is the same as
-`strek95.tgz`, which was recovered.
+`strek95.tar.gz`, also linked from `startrek.html`, is not on the live
+page. The content is the same as `strek95.tgz`, which is.
 
 ## License
 
