@@ -1,0 +1,228 @@
+
+COPYING -      GNU General Public License version 2.0
+
+MANIFEST -     List of files and functions
+
+README -       Some notes and information
+
+archive.sh -   A shell I use to archive my source code
+
+computer.c -   Library computer functions
+  computer
+  show_computer_menu
+  galactic_record
+  dd-calc
+  starbase_nav
+  status_report
+  torp_calc
+  location_calc
+
+damage.c -     Handles the damage data structure
+  new_damage
+  set_damage
+  get_damage
+  damaged
+  repair_damage
+  at_shipyard
+
+dc.c -         Damage Control Central
+  do_dc
+
+devices.c -    Ship Devices
+  get_device_name
+
+disk_io.c -    Disk IO functions
+  openfile
+  closefile
+  write_int
+  read_int
+  write_int_array
+  read_int_array
+  getline
+
+end_game.c -   End game logic
+  ship_destroyed
+  end_of_time
+  resign_commision
+  won_game
+  end_game
+
+galaxy.c -     Galaxy data structure
+  new_galaxy
+  get_galaxy
+  get_tot_klingons
+  get_tot_starbases
+  get_klingons_left
+  add_ship_galaxy
+  add_station_galaxy
+  sub_ship_galaxy
+  sub_station_galaxy
+
+galrec.c -     Galactic record used by library computer
+  new_galrec
+  set_galrec
+  get_galrec
+
+instruct.c -   Queries user and displays instructions
+  instructions
+
+instruct.doc - Instruction text file
+
+klingon.c -    Handles Klingon data structure
+  set_klingon
+  set_klingon_energy
+  get_klingon
+  del_klingon
+  clear_klingons
+  klingons_move
+  klingons_fire
+
+location.c -   Location logic
+  compute_vector
+  resolve_vector
+
+lrs.c -        Long range sensors
+  long_range_sensors
+
+nav.c -        Navigation (both warp and impulse engines)
+  impulse_enginces
+  warp_engines
+  nav
+
+phasers.c -    Phasers
+  phasers
+  hit_klingon
+
+posit.c -      Position logic
+  set_posit
+  get_posit
+  get_rand_posit
+  new_posit
+  compute_dirdist
+  course_spd
+  course_display
+
+qnames.c -     Quadrant names
+  quadrant_name
+  map_name
+
+rand.c -       Random numbers
+  randomize
+  get_rand
+  rnd
+
+rank.c -       Name and rank
+  set_name
+  get_name
+  set_rank
+  get_rank
+  get_rank_name
+  select_rank
+  promotion
+  demotion
+  get_full_name
+  print_full_name
+  promoted
+
+scanners.c -   Scanners
+  scanners
+
+score.c -      Scores
+  new_score
+  add_score
+  sub_score
+  get_score
+  get_rating
+
+shields.c -    Shields
+  shield_control
+
+ship.c -       Data structure for your own ship
+  set_shiptype
+  get_shiptype
+  set_shipname
+  get_shipname
+  set_condition
+  get_condition
+  get_condition_name
+  set_torpedoes
+  sub_torpedo
+  get_torpedoes
+  set_energy
+  get_energy
+  sub_energy
+  set_shields
+  get_shields
+  new_ship
+  check_dock
+  next_to_station
+  undock
+
+shiptype.c -   Data structure on the different ship type
+  get_typename
+  get_image
+  get_maneuver
+  get_maxvelocity
+  get_maxfuel
+  get_maxenergy
+  get_gencap
+  get_maxphaser
+  get_maxtorp
+  get_maxsheild
+  get_armor
+
+sound.c -      Sound (beep)
+  toggle_sound
+  beep
+
+space.c -      Data structure of what is inside the quadrant
+  new_space
+  set_space
+  get_space
+  get_klingons_space
+  sub_klingon_space
+  sub_station_space
+  move_klingon
+
+srs.c -        Short range sensors
+  short_range_sensors
+
+standard.c -   Standard IO routines
+  y_or_n
+  itoa
+  get_string
+  pause
+  showfile
+  cint
+  s_rot
+  s_center
+
+starbase.c -   Starbase data structure
+  set_starbase
+  get_starbase
+  clear_starbase
+  del_starbase
+
+stardate.c -   Stardate data structure
+  new_stardate
+  get_stardate
+  inc_stardate
+  add_stardate
+  get_startdate
+  set_deadline
+  get_timeleft
+  check_expiration
+  get_elapsed_time
+  print_stardate
+
+startrek.c -   Main module
+  main
+  intro
+  new_game
+  show_menu
+
+torps.c -      Photon Torpedoes
+  photon_torpedoes
+
+
+

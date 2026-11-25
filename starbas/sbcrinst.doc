@@ -1,0 +1,104 @@
+
+
+                    Star Battles Scenario Creation Utility
+
+                               Instructions
+
+                             by Chris Nystrom
+
+                                (c) 1990
+
+
+      It is easy to create your own Star Battles scenarios. Simply type
+SBCREATE and follow the prompts.
+   First you will be given a generated stardate, or you can give your own.
+   Then you will be asked to input the galaxy size from 10 to 70. This
+determines the size of demensions of the quadrant grid. Remember each quadrant
+is a 10 X 10 grid in itself, so you can create a very large galaxy.
+   You will then be asked to input the number of fleets. This is how the ships
+are divided. You should not have more than 20 ships in a fleet.
+   Last you will be asked the total number of ships in the scenario. The more
+ships you have the slower the game will process moves.
+   The program will then create the Galaxy based on the parameters that you
+set, and all the stars will be created and placed into the galaxy.
+   You will then be asked for the names of each of the fleets. It can be up to
+60 characters.
+   You will then see the ship number, and be asked for what side the ship will
+be on. The side number determines enemies from friends. Ships controlled by
+the computer will attack other ships if the side number is different. Ships
+can be of different cultures, and have the same side number (allies), or ships
+can be of the same culture and have different side numbers (a rebellion).
+   Next you will be presented with the known races of the galaxy:
+
+      1.   Federation
+      2.   Klargon
+      3.   Zornian
+      4.   Hasmurd
+      5.   Robotron
+      6.   Farnic
+      7.   Chaldean
+      8.   Phesian
+      9.   Hattian
+      10.  Alien
+      11.  Other
+
+   If you choose other you will be asked to input the name of a culture, up to
+10 characters.
+   You will then be asked to input the fleet number, based on the number of
+fleets you previously entered. After you are done an abreviated version of the
+fleet name will appear.
+   You will be asked to enter the ship type from the list of 22 ships. They
+are:
+
+      1.   Patrol
+      2.   Corvette
+      3.   Torpedo Craft
+      4.   Frigate
+      5.   Destroyer
+      6.   Light Cruiser
+      7.   Heavy Cruiser
+      8.   Monitor
+      9.   BattleCruiser
+      10.  Battle Ship
+      11.  Dreadnought
+      12.  DeathStar
+      13.  Space Station
+      14.  Space Outpost
+      15.  Space Dock
+      16.  Sensor Ship
+      17.  Fueler
+      18.  Repair Ship
+      19.  Freighter
+      20.  Transport
+      21.  Tanker
+      22.  Barge
+
+   After giving the ship type you will need to type in the ships name up to 25
+characters.
+   Then you type in the Quadrant coordinates. The coordinates are numbered from
+the top left corner. The X-Coordinate is going down, and the Y-Coordinate is
+going across. The range is from 1 to whatever you typed in for Galaxy size.
+   Next you type in the sector coordinates. They are exactly like the quadrant
+coordinates, except for the range is always 1 to 10.
+   You input the course (0-360), and then the velocity. The range on the
+velocity is from 0 to the maxvelocity for that class of ship.
+   Next you will enter the amount of fuel onboard. Range will be from 0 to the
+max fuel capacity of the ship. You will do the same thing for energy next.
+   If the ship has torpedo capacity, then you will input the number of
+torpedoes onboard.
+   You will repeat this for each ship in the game.
+   After you have completed entering the data, the program chains to Star
+Battles, and you will be listed as creator, with control of all fleets. Make
+whatever changes are nessessary. You should check and make sure ships are not
+about to collide with other ships or stars. You might also want to turn off
+short and long range sensors so players won't be able to locate each other at
+the start. You should end your turn at least once. The program will process
+the turn, however ships will not move, nor will weapons be fired. After this
+all you have to is SAVE your scenario. Don't forget to do this!
+   Some tips: Planning goes a long way. You can print out the form I used to
+plan my scenarios by typing at the DOS prompt: TYPE CREATE.DOC>PRN.
+   I also found graph paper very handy for planning formations.
+   Good luck! If you come up with some good scenarios send them to me, and I
+will send you my latest scenarios. If I use them in a follow on scenario disk
+I will give you credit for writing them.
+

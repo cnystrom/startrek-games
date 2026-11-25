@@ -1,0 +1,1036 @@
+
+
+                            Star Battles
+
+                          by Chris Nystrom
+
+                       Beta Test Version 0.10
+
+                             (c) 1990
+
+
+
+
+              Features -
+
+                 - Multi-Ship Space Fleet Conflict
+                 - Multiple Players
+                 - 22 Different Ship Types
+                 - 13 Scenarios Included
+                 - Capability to Design your own Scenarios
+                 - Easy to Use Interface
+                 - Supports Mouse
+
+
+   This program should run on any compatible with at least 256K memory, running
+DOS 2.0 or better. A hard drive or a second disk drive would be conveinent,
+along with a mouse. A graphics monitor is not required, but a color monitor
+would enhance the look of this program. Joysticks are not supported.
+   The first thing to do is to make a backup copy of both disks. STAR BATTLES
+is not copy protected. One way to do this might be to place STAR BATTLES in
+drive A:, a blank formatted disk in drive B:, and type:
+
+      A:COPY *.* B:
+
+   If you are using a hard drive, make a subdirectory, and copy all the files
+into that subdirectory. Here is an example of how that might be done:
+
+      C:
+      MD STARBAT
+      CD STARBAT
+      COPY A:*.*
+
+    To make this program run faster, set up a ramdisk to be used for temporary
+files, using the supplied ramdisk utility, or your own ramdisk software. Add
+the line:
+
+       DEVICE=RAMDISK.SYS
+
+to your CONFIG.SYS file, using EDLIN or another editor. If this does not sound
+familiar to you consult your DOS reference, or just skip this section. Next,
+add the line:
+
+       RAMDISK 64
+
+into your AUTOEXEC.BAT file, or just type it in from the DOS command line. 
+A virtual disk drive of 64K will be set in RAM. It will use the next available
+disk drive letter. Now set up a path to use for temporary files by adding the
+line:
+
+       SET TMP=C:\
+
+into your AUTOEXEC.BAT file, or type in from the DOS command line. Use the
+drive letter corresponding to your RAM disk.
+    If you decide not to use a RAM disk, using the above command to direct
+temporary files to your hard disk will speed up the game, since a hard drive
+is much faster than a floppy drive.
+
+    To run the game on a single drive system, put disk #1 in the drive and type
+STARBAT. When it is time to to load in a scenario, put disk #2 in the drive.
+    For 2 floppy drive systems, put disk #1 in drive A:, and disk #2 in
+drive B:. Make sure the default drive is set for A:, and type STARBAT. When it
+comes time to load in a scenario, and you are asked to input the path,
+type B:\.
+    If you have a hard drive then change your default directory to the one that
+has the Star Battles programs and data files, and type STARBAT.
+
+
+                        STAR BATTLES Instructions
+
+   Star Battles is a tactical wargame simulating conflict between space
+fleets. It is a strategy game, and not an arcade game. A player makes decisions
+concerning the ships he controls, and then the computer processes the
+turn. This continues until only one side is left, or the player is finished.
+The simulation supports multiple players, whether on the same side, or
+opposing sides.
+   To begin, type STARBAT (to skip the opening, just type SB). A menu with the
+choices below will appear:
+
+      END TURN
+      SAVE GAME
+      LOAD GAME
+      QUIT
+
+   Select a choice use the cursor control (arrow) keys to go up or down. When
+the selection desired is highlighted, push the ENTER key. If you are using a
+mouse, roll it up or down to highlight your selection, then push the left
+button.
+   To start the game select LOAD GAME. Enter the path where the scenario data
+files can be found, and then the name of the scenario (The descriptions of
+each scenario are listed later). To learn how to play STAR BATTLES just
+type 1. The status message 'Loading 1.DAT...' will appear.
+   After the scenario is loaded, input the number of players. Enter 1. Next,
+player 1's name will be requested. Enter Captain Kirk, or whatever name
+desired. Next, assign a player to each fleet listed. You will use a menu that
+includes the computer, and each player name. Assign the fleet to a player, or
+to the computer to control.
+
+   Next will be the player selection menu. The player names as well as SAVE,
+LOAD, and QUIT will appear. The player selects his or her name to have access
+to his or her fleets, or ships.
+   SAVE is used to save a scenario to play later.
+   LOAD is used to load a new scenario.
+   QUIT can be selected to QUIT the game.
+  
+   Next will be a list of available fleets, or ships. Select the fleet or
+ship desired. After the ship is selected, a list of options will appear:
+
+   CARGO - This option will list cargo onboard. If docked use this option to
+      transfer cargo. Computer controlled ships will automatically
+      transfer cargo, if it is available.
+
+   DAMAGE CONTROL - Provides a list of ship's equipment, and current repair
+      status.
+
+   LIBRARY COMPUTER - This option has 3 sub options. There is a Direction
+      and Distance Calculator, a Location Calculator, and a Photon Torpedo
+      Calculator.
+         The Direction and Distance Calculator computes a direction and
+      distance given any two points.
+         The Location Calculator computes a location given a point, a
+      direction, and a distance.
+         The Torpedo Calculator gives recommended torpedo courses based upon
+      targets identified by the ship's Directors. More on directors in the
+      Sensors section.
+
+   MAIN CONTROL - This option is used to control engineering equipment.
+
+      Generators convert fuel to energy.
+      Impulse Engines convert energy to velocity.
+      Thrusters are used to provide directional control.
+      The Switchboard is used to turn Sensors on, or off.
+
+   MESSAGES - Select this option to read messages from the crew that came up
+      while the last move was processed.
+
+   NAVIGATION - There are 2 options here. Manuever or Dock.
+
+         The Manuever Option will present the Scanner display, and request a
+      heading, and an ordered velocity.
+    
+                                    000
+                                    360
+                                     :
+                               270..<+>..090
+                                     :
+                                    180
+
+                                 Headings
+
+         Next, Enter a velocity from 0 to the maximum velocity for that class
+      of ship. At least 1 Thruster online is required to be able to change
+      your heading. If 2 thrusters are online, your heading will change faster.
+      At least 1 Engine online is required to move, and the more engines
+      online the faster the movement. Collision with stars or other ships could
+      cause damage.
+
+         A ships can only DOCK with one other ships at a time. In addition, the
+      following conditions must be met:
+
+            1. There must be no more than 1 unit of velocity difference
+               between ships.
+            2. The docking ship's heading must be within 10 degrees of the
+               heading of other ship, unless the other ship is a Space Station.
+            3. The other ship must have shields lowered.
+
+   SENSORS - There are several different types of Sensors.
+
+      SCANNER is a visual display of the surroundings. In addition, if the
+         cursor is placed on a particular ship to scan, a status report on
+         that ship will be presented, including an energy reading, shield
+         status report, and damage percent report.
+        
+      SHORT RANGE SENSOR provides a coded display of your quadrant as well as
+         2 quadrants around you in all directions. The 100's digit in the code
+         is the number of smaller ships. Then 10's digit is the number of
+         larger ships (such as space stations), and the 1's digit is the
+         number of stars in that sector.
+            For example: '213' indicates 2 smaller ships, 1 space station, and
+         3 stars in that sector.
+
+      LONG RANGE SENSOR is almost exactly like the short range sensor except
+         that it displays 3 quadrants around you in all directions. Be aware
+         that your enemies can locate you from very far away when you use your
+         active sensors. In fact a Long Range Sensor is almost like a beacon.
+
+      DIRECTORS are like scanners except that they are used to identify
+         targets for phasers. You must have a director locked on to a target
+         for your phaser to hit it.
+
+      ESM stands for Energy Surviellence Measures, and it is used to pick up
+         the bearing from which sensors are radiating from. This passive
+         detection of other vessals does not inform others of your location.
+         You can pick up other vessals via ESM much farther out than you can
+         with active sensors such as Long Range Sensors, however you can not
+         get distance information via ESM.
+            Your enemy can defeat ESM by simply turning off his sensor.
+
+   SHIELDS - Transfer energy to your shields to provide protection. This
+      energy is lost every turn, but is automatically realocated each turn if
+      it is available. Entering 0 units will turn off your shields.
+         If you have only one shield it provides 360 degree protection.
+         If you have two shields, shield #1 provides coverage for the foreward
+      part of the ship, from 271 degrees to 090 degrees relative to the bow of
+      the ship.
+          If you have three shields then shield #1 provides coverage for the
+      foreward part of the ship, from 301 degrees to 060 degrees. Shield #2
+      provides coverage for starboard quarter from 061 degrees to 180 degrees.
+      Shield #3 provides coverage for the port quarter from 181 degrees to 300
+      degrees.
+          If you have four shields then shield #1 provides coverage for the
+      foreward part of the ship from 316 degrees to 045 degrees. Shield #2
+      provides coverage for the starboard side of the ship from 046 degrees to
+      135 degrees. Shield #3 provides coverage for the stern of the ship from
+      136 degrees to 225 degrees. Shield #4 provides cover for the port side
+      of the ship from 226 degrees to 315 degrees.
+
+   WEAPONS - There are 2 types of weapons. Phasers and Photon Torpedoes.
+
+      PHASERS are energy weapons. They are less powerful than torpedoes, but
+         are more likely to hit the target. You must have the corresponding
+         Director locked on target, or your Phaser will just shoot out into
+         space. Directors are found in the SENSORS section.
+
+      TORPEDOES are less likely to hit your opponent, but always cause serious
+         damage when they do. You can get a torpedo course recommendation from
+         the ships computer, but this information is only valid if your
+         opponent maintains course and speed (which he or she probably won't).
+         You can offset this by firing a spread of torpedoes if you have
+         multiple tubes.
+
+
+                            SHIP TYPES
+
+   Patrolers - The weakest of all combatant vessals, but useful for maintaining
+      a military presence or keeping watch in an area.
+
+      Image - {+}
+ 
+      Max Manueverability - 60 deg/turn.
+         1 Thruster.
+      Max Velocity - 8 sectors/turn.
+         1 Impulse Engine.
+      Max Fuel - 100 units.
+      Max Fuel Usage - 2 units/turn.
+      Max Energy - 500 units.
+      Max Generator Capacity - 150 units.
+         1 Generator (150 units)
+      1 Phaser (50 units)
+      1 Shield (50 units)
+      Sensors:   Scanner
+                 Short Range Sensor
+                 1 Director
+                 ESM
+
+   Corvettes - Slightly more powerful than patrollers, but lacking photon
+      torpedoes seriously affects the ability of this class to engage in
+      combat.
+     
+
+      Image - {=}
+
+      Max Manueverability - 80 deg/turn.
+         1 Thruster.
+      Max Velocity - 10 sectors/turn.
+         1 Impulse Engine.
+      Max Fuel - 150 units.
+      Max Fuel Usage - 2 units/turn.
+      Max Energy - 700 units.
+      Max Generator Capacity - 200 units.
+         1 Generator (200 units)
+      2 Phasers (50 units)
+      1 Shield (50 units)
+      Sensors:   Scanner
+                 Short Range Sensor
+                 1 Director
+                 ESM
+
+   Torpedo Craft - Unique in not having phasers at all, Torpedo craft can be
+      very dangerous even to much larger ships because its 2 torpedo tubes
+      can cause a lot of damage quickly.
+    
+      Image - (=)
+
+      Max Manueverability - 80 deg/turn.
+         1 Thruster.
+      Max Velocity - 10 sectors/turn.
+         1 Impulse Engine.
+      Max Fuel - 150 units.
+      Max Fuel Usage - 2 units/turn.
+      Max Energy - 800 units.
+      Max Generator Capacity - 200 units.
+         1 Generator (200 units)
+      Max Torpedo Capacity - 4 torpedoes.
+         2 Torpedo Tubes.
+      1 Shield (50 units)
+      Sensors:   Scanner
+                 Short Range Sensor
+                 1 Director
+                 ESM
+
+   Frigates - Very useful small combatants, frigates are the smallest vessals
+      that are full featured, meaning that they have both types of weapons, and
+      thay have long range sensors. They are also the fastest and most
+      manueverable vessals.
+
+      Image - (+)
+ 
+      Max Manueverability - 90 deg/turn.
+         1 Thruster.
+      Max Velocity - 12 sectors/turn.
+         2 Impulse Engines.
+      Max Fuel - 200 units.
+      Max Fuel Usage - 3 units/turn.
+      Max Energy - 1000 units.
+      Max Generator Capacity - 250 units.
+         1 Generator (250 units)
+      1 Phaser (100 units)
+      Max Torp Capacity - 4 torpedoes.
+         1 Torpedo tube.
+      1 Shields (100 units)
+      10 units of armor.
+      Sensors:   Scanner
+                 Short Range Sensor
+                 Long Range Sensor
+                 1 Director
+                 ESM
+
+   Destoyers - Originally named torpedo craft destroyers these vessals were
+      designed to protect against the torpedo craft menace. These vessals are
+      fast and powerful, yet are not too big to risk on daring missions.
+
+      Image - <+>
+ 
+      Max Manueverability - 60 deg/turn.
+         1 Thruster.
+      Max Velocity - 10 sectors/turn.
+         2 Impulse Engines.
+      Max Fuel - 300 units.
+      Max Fuel Usage - 4 units/turn.
+      Max Energy - 1500 units.
+      Max Generator Capacity - 400 units.
+         2 Generators (200 units ea.)
+      2 Phasers (150 units ea.)
+      Max Torp Capacity - 8 torpedoes.
+         2 Torpedo tubes.
+      1 Shields (150 units)
+      20 units of armor.
+      Sensors:   Scanner
+                 Short Range Sensor
+                 Long Range Sensor
+                 2 Directors
+                 ESM
+
+   Light Cruisers - Originally named armored cruisers, or just plain cruisers.
+      These vessals are designed for military missions of long duration and
+      cruising a large area. However they are not much stronger than
+      destroyers.
+
+      Image - [+]
+ 
+      Max Manueverability - 50 deg/turn.
+         2 Thrusters.
+      Max Velocity - 10 sectors/turn.
+         2 Impulse Engines.
+      Max Fuel - 600 units.
+      Max Fuel Usage - 6 units/turn.
+      Max Energy - 2000 units.
+      Max Generator Capacity - 600 units.
+         2 Generators (300 units ea.)
+      2 Phasers (200 units ea.)
+      Max Torp Capacity - 12 torpedoes.
+         2 Torpedo tubes.
+      2 Shields (Foreward, and Aft)
+         200 units ea.
+      30 units of armor.
+      Sensors:   Scanner
+                 Short Range Sensor
+                 Long Range Sensor
+                 2 Directors
+                 ESM
+
+   Heavy Cruisers - A more powerful cruiser designed to provide an advantage
+      over destroyers. These are good all purpose ships.
+
+      Image - {#}
+ 
+      Max Manueverability - 40 deg/turn.
+         2 Thrusters.
+      Max Velocity - 8 sectors/turn.
+         3 Impulse Engines.
+      Max Fuel - 750 units.
+      Max Fuel Usage - 9 units/turn.
+      Max Energy - 2700 units.
+      Max Generator Capacity - 900 units.
+         3 Generators (300 units ea.)
+      3 Phasers (250 units ea.)
+      Max Torp Capacity - 16 torpedoes.
+         3 Torpedo tubes.
+      2 Shields (Foreward, and Aft)
+         250 units ea.
+      40 units of armor.
+      Sensors:   Scanner
+                 Short Range Sensor
+                 Long Range Sensor
+                 3 Directors
+                 ESM
+
+   Monitor - A defensive ship with powerful weapons, but little movement
+      capability.
+
+      Image - <Ø>
+
+      Max Manueverability - 10 deg/turn.
+         1 Thruster.
+      Max Velocity - 2 sectors/turn.
+         1 Impulse Engine.
+      Max Fuel - 1000 units.
+      Max Fuel Usage - 12 units/turn.
+      Max Energy - 3500 units.
+      Max Generator Capacity - 1150 units.
+         3 Generators (350 units ea.)
+      2 Phasers (350 units ea.)
+      2 Shields (Foreward, and Aft)
+         350 units ea.
+      60 units of armor.
+      Sensors:   Scanner
+                 Short Range Sensor
+                 2 Directors
+                 ESM
+
+   Battle Cruisers - This ship is designed to outrun anything bigger than it,
+      and outgun anything smaller than it.
+
+      Image - (#)
+
+      Max Manueverability - 30 deg/turn.
+         2 Thrusters.
+      Max Velocity - 8 sectors/turn.
+         3 Impulse Engines.
+      Max Fuel - 1200 units.
+      Max Fuel Usage - 18 units/turn.
+      Max Energy - 4200 units.
+      Max Generator Capacity - 1400 units.
+         4 Generators (350 units ea.)
+      3 Phasers (300 units ea.)
+      Max Torp Capacity - 20 torpedoes.
+         3 Torpedo tubes.
+      3 Shields (Foreward, Starboard Quarter, and Port Quarter)
+         300 units ea.
+      50 units of armor.
+      Sensors:   Scanner
+                 Short Range Sensor
+                 Long Range Sensor
+                 3 Directors
+                 ESM
+
+   Battleships - Originally the queen of the stars until the advent of the new
+      modern dreadnoughts. This ships are still very powerful, however they are
+      niether fast, nor manueverable.
+
+      Image - <#>
+ 
+      Max Manueverability - 20 deg/turn.
+         2 Thrusters.
+      Max Velocity - 6 sectors/turn.
+         4 Impulse Engines.
+      Max Fuel - 1800 units.
+      Max Fuel Usage - 20 units/turn.
+      Max Energy - 5400 units.
+      Max Generator Capacity - 1800 units.
+         4 Generators (450 units ea.)
+      4 Phasers (350 units ea.)
+      Max Torp Capacity - 24 torpedoes.
+         4 Torpedo tubes.
+      4 Shields (Foreward, Port, Starboard, and Aft)
+         350 units ea.
+      60 units of armor.
+      Sensors:   Scanner
+                 Short Range Sensor
+                 Long Range Sensor
+                 4 Directors
+                 ESM
+
+   Dreadnoughts - These ships fear nothing (except maybe the rare death star),
+      as they are the premier combatant ship in the galaxy.
+
+      Image - [#]
+  
+      Max Manueverability - 20 deg/turn.
+         2 Thrusters.
+      Max Velocity - 6 sectors/turn.
+         4 Impulse Engines.
+      Max Fuel - 2000 units.
+      Max Fuel Usage - 20 units/turn.
+      Max Energy - 6000 units.
+      Max Generator Capacity - 2000 units.
+         4 Generators (500 units ea.)
+      4 Phasers (400 units ea.)
+      Max Torp Capacity - 28 torpedoes.
+         4 Torpedo tubes.
+      4 Shields (Foreward, Port, Starboard, and Aft)
+         400 units ea.
+      70 units of armor.
+      Sensors:   Scanner
+                 Short Range Sensor
+                 Long Range Sensor
+                 4 Directors
+                 ESM
+
+   Death Stars - Considered a dirty weapon by self respecting civilizations,
+      this ship has one very powerful phaser that destroys anything it hits.
+      It is useful for destroying space stations if you can get it there.
+
+      Image - -+O
+
+      Max Manueverability - 5 deg/turn.
+         2 Thrusters.
+      Max Velocity - 2 sectors/turn.
+         4 Impulse Engines.
+      Max Fuel - 8000 units.
+      Max Fuel Usage - 80 units/turn.
+      Max Energy - 16000 units.
+      Max Generator Capacity - 8000 units.
+         4 Generators (2000 units ea.)
+      1 Phaser (4000 units)
+      4 Shields (Foreward, Port, Starboard, and Aft)
+         1500 units ea.
+      100 units of armor.
+      Sensors:   Scanner
+                 Short Range Sensor
+                 Long Range Sensor
+                 1 Director
+                 ESM
+
+   Space Stations - These all purpose stations provide fuel, energy and
+      torpedoes, to ships that dock with them. They also repair equipment that
+      has been destroyed by combat. They also have very powerful defensive
+      capabilities. They cannot move.
+
+      Image - >O<
+ 
+      Max Manueverability - 0 deg/turn.
+      Max Velocity - 0 sectors/turn.
+      Max Fuel - 5000 units.
+      Max Fuel Usage - 40 units/turn.
+      Max Energy - 12000 units.
+      Max Generator Capacity - 4000 units.
+         4 Generators (1000 units ea.)
+      4 Phasers (500 units ea.)
+      Max Torp Capacity - 150 torpedoes.
+         4 Torpedo tubes.
+      4 Shields (Foreward, Port, Starboard, and Aft)
+         600 units ea.
+      80 units of armor.
+      Sensors:   Scanner
+                 Short Range Sensor
+                 Long Range Sensor
+                 4 Directors
+                 ESM
+
+   Space Outpost - Space Outpost are similiar to Space Stations. They are
+      military controlled, and provide fuel, energy, and torpedoes. Unlike
+      space stations, they provide no repair facilities. Star Fleet prefers
+      to procure mobile repair ships. They do have defensive capability.
+
+      Image - >=<
+
+      Max Manueverability - 0 deg/turn.
+      Max Velocity - 0 sectors/turn.
+      Max Fuel - 3000 units.
+      Max Fuel Usage - 10 units/turn.
+      Max Energy - 6000 units.
+      Max Generator Capacity - 1000 units.
+         2 Generators (500 units ea.)
+      2 Phasers (250 units ea.)
+      Max Torp Capacity - 50 torpedoes.
+         2 Torpedo tubes.
+      2 Shields (Foreward, and Aft)
+         300 units ea.
+      40 units of armor.
+      Sensors:   Scanner
+                 Short Range Sensor
+                 Long Range Sensor
+                 2 Directors
+                 ESM
+ 
+   Space Dock - Space Docks are civilian controlled space ports. They provide
+      fuel and energy. They do not have any weapons, but they do have repair
+      facilities.
+
+      Image - >+<
+
+      Max Manueverability - 0 deg/turn.
+      Max Velocity - 0 sectors/turn.
+      Max Fuel - 2000 units.
+      Max Fuel Usage - 6 units/turn.
+      Max Energy - 2000 units.
+      Max Generator Capacity - 600 units.
+         2 Generators (300 units ea.)
+      2 Shields (Foreward, and Aft)
+         200 units ea.
+      20 units of armor.
+      Sensors:   Scanner
+                 Short Range Sensor
+
+   Sensor Ship - This ship is used for lon range surviellance and deception.
+
+      Image - )I(
+
+      Max Manueverability - 30 deg/turn.
+         1 Thruster.
+      Max Velocity - 8 sectors/turn.
+         1 Impulse Engine.
+      Max Fuel - 200 units.
+      Max Fuel Usage - 3 units/turn.
+      Max Energy - 1000 units.
+      Max Generator Capacity - 300 units.
+         2 Generator (150 units)
+      1 Phaser (100 units)
+      1 Shield (100 units)
+      Sensors:   Scanner
+                 Short Range Sensor
+                 1 Director
+                 ESM
+
+   Fueler - Provides a mobile resupply of fuel, energy, and torpedoes. Some
+      defensive capability.
+
+      Image - +è+
+ 
+      Max Manueverability - 30 deg/turn.
+         2 Thrusters.
+      Max Velocity - 10 sectors/turn.
+         2 Impulse Engines.
+      Max Fuel - 3000 units.
+      Max Fuel Usage - 6 units/turn.
+      Max Energy - 2000 units.
+      Max Generator Capacity - 600 units.
+         2 Generators (300 units ea.)
+      1 Phaser (200 units ea.)
+      Max Torp Capacity - 0 torpedoes.
+      2 Shields (Foreward, and Aft)
+         200 units ea.
+      20 units of armor.
+      Sensors:   Scanner
+                 Short Range Sensor
+                 Long Range Sensor
+                 1 Director
+                 ESM
+
+   Repair Ship - A mobile repair station. It has some refueling capability.
+
+      Image - +X+
+
+      Max Manueverability - 20 deg/turn.
+         1 Thruster.
+      Max Velocity - 6 sectors/turn.
+         1 Impulse Engine.
+      Max Fuel - 1000 units.
+      Max Fuel Usage - 4 units/turn.
+      Max Energy - 1000 units.
+      Max Generator Capacity - 400 units.
+         2 Generators (200 units ea.)
+      1 Phaser (100 units ea.)
+      Max Torp Capacity - 0 torpedoes.
+      1 Shield (100 units)
+      Sensors:   Scanner
+                 Short Range Sensor
+                 1 Director
+                
+   Frieghter - Slow cargo carrier with no weapons.
+
+      Image - ðOð
+ 
+      Max Manueverability - 10 deg/turn.
+         1 Thruster.
+      Max Velocity - 2 sectors/turn.
+         1 Impulse Engine.
+      Max Fuel - 200 units.
+      Max Fuel Usage - 1 unit/turn.
+      Max Energy - 200 units.
+      Max Generator Capacity - 100 units.
+         1 Generator (100 units ea.)
+      1 Shield (25 units)
+      Sensor:   Scanner
+               
+   Transport - Slow personnel carrier with no weapons.
+
+      Image - (ð)
+
+      Max Manueverability - 10 deg/turn.
+         1 Thruster.
+      Max Velocity - 2 sectors/turn.
+         1 Impulse Engine.
+      Max Fuel - 200 units.
+      Max Fuel Usage - 1 unit/turn.
+      Max Energy - 200 units.
+      Max Generator Capacity - 100 units.
+         1 Generator (100 units ea.)
+      1 Shield (25 units)
+      Sensor:   Scanner
+               
+   Tanker - Slow fuel carrier with no weapons. Can replenish other ships.
+
+      Image - +O+
+
+      Max Manueverability - 10 deg/turn.
+         1 Thruster.
+      Max Velocity - 2 sectors/turn.
+         1 Impulse Engine.
+      Max Fuel - 1000 units.
+      Max Fuel Usage - 1 unit/turn.
+      Max Energy - 200 units.
+      Max Generator Capacity - 100 units.
+         1 Generator (100 units ea.)
+      1 Shield (25 units)
+      Sensor:   Scanner
+              
+   Barge - Unpowered fuel carrier with no weapons. Can replenish other ships.
+
+      Image - -O-
+
+      Max Manueverability - 60 deg/turn.
+         1 Thruster.
+      Max Velocity - 0 sectors/turn.
+      Max Fuel - 1000 units.
+      Max Fuel Usage - 1 unit/turn.
+      Max Energy - 100 units.
+      Max Generator Capacity - 50 units.
+         1 Generator (50 units ea.)
+      1 Shield (25 units)
+      Sensor:   Scanner
+                  
+                     
+                             FORMATION STEAMING
+
+   As any good Commodore from the age of sail to the age of the impulse
+engine knows, nothing can strike fear in an opponent more than a tight for-
+mation of ships. It tells your opponent that you know what you are doing. You
+are a competent and confident commander. It is the clearest most visible dis-
+play of the skill of the officer in charge. Precise control of you ships also
+serves the added purpose of preventing the torpedoing your own ships! Con-
+trolling the disposition of your ships is not as easy as it looks and often
+in battles formations can not be maintained, but the pride and satisfaction
+derived from a tightly run formation is tremendous. I will only briefly dis-
+cuss some of the basic formations and manuevers here.
+   First a few terms. The Guide is the ship that all the other ships form up
+on. True Bearing is bearing with respect to 000 (straight up). Relative
+bearing is with respect to the bow of the ship. For example a ship is on
+course 090 (right). The port beam is always 270 relative (to the bow), but
+in this case is also 000 true.
+   The simplest formation is a Column. The ships are all in a line in the
+same direction as their course with the guide in the lead.
+   A variation of a column is a Line Abreast. In this formation ships are
+formed up on the beam of the guide.
+   A Line of Bearing is a formation in which the ships are niether
+ahead, behind, or abeam of the guide ship, but still in a line. For example,
+if the formation course was 000 and the ships were all in a line on a bearing
+135.
+   A Diamond Formation is a formation where the 2nd and 3rd ships are at a
+45 degree angle from the guide ship and the fourth ship is at a 45 deg angle
+from the 2nd and 3rd ships, directly behind the guide, in a diamond shape.
+   A Turn is a movement where all ships turn at the same time. Upon comple-
+tion of the manuever each ship retains its original true bearing from the
+guide, but its relative bearing has changed.
+   A Corpen (also called wheeling) is a manuever where formation course is
+altered without altering the arrangement of the ships. On completion of the
+manuever each ship retains its original relative bearing from the guide, but
+the true bearing has changed. Limitations on the amout of a wheel turn are:
+
+         Column................180 deg.
+         Line Abreast...........90 deg.
+         Diamond................30 deg.
+
+   When wheeling a column, the lead ship turns to the new course, and re-
+maining ships follow behind the lead ship maintaining the column. When a line
+abreast is wheeeled the end ship in the direction of the turn (pivot ship)
+comes to the new course. Remaining ships increase speed and manuever inde-
+pendantly to regain their original relative bearing from the guide.
+   A Search Turn is used for altering course of a Line Abreast or Line of
+Bearing formation when covering an area. The turn must be at least 45 deg,
+but not more than 135 deg. The wing ship away from the direction of the turn
+comes to the new course and becomes the guide. When this ship passes astern
+of the next ship then this ship turns, and so on down the line until all
+ships are on the new course.
+   Another formation is a Screen. For example a convoy of merchant ships
+could be grouped in the same sector, while escort ships could be placed in
+adjacent sectors in the direction of the threat(s) to intercept any attacks
+before they reach the defenceless merchant vessals.
+
+
+                                 SCENARIO 1
+
+   Load: 1
+
+   Stardate: 2700
+
+   Fleet Number 1: FSS Hotspur (1 Frigate)
+   Fleet Number 2: KB IX-A (1 Barge)
+
+      This is a basic scenario to give you practice with Star Battles. You are
+given a mission of destroying a Klargon barge that was abandoned by the Klargon
+Empire when it was expelled from these quadrants by the Federation fleet during
+Galactic War I. Never fear! Barges have no weapons.
+      Recommended configuration is for the computer to control fleet #2.
+
+
+                                 SCENARIO 2
+
+   Load: 2
+
+   Stardate: 2891
+
+   Fleet Number 1: FSS John Paul Jones (1 Destroyer)
+   Fleet Number 2: KS Kasturi (1 Frigate)
+
+      On stardate 2891 the Federation destroyer FSS John Paul Jones chanced
+upon a solitary Klargon frigate. Although an uneven match, the Federation
+Destroyer displayed the fighting qualities of her namesake (an 18th century
+admiral from the planet Earth), destroying her advisary in a viscous fight.
+Your mission is to do the same.
+      Recommended configuration is for the computer to control fleet #2.
+
+
+                                 SCENARIO 3
+
+   Load: 3
+
+   Stardate: 2952
+
+   Fleet Number 1: FSS Lydia (1 Destroyer)
+   Fleet Number 2: KS Kabul (1 Destroyer)
+
+      An even match up was the duel between the Federation destroyer FSS Lydia
+and the Klargon Destroyer KS Kabul. Although a long and grueling battle, both
+ships survived the encounter, limping home with extensive damages. See if you
+can do better.
+      A single player can play either side. This would also be a good two
+player scenario.
+
+
+                                 SCENARIO 4
+
+   Load: 4
+
+   Stardate: 2983
+
+   Fleet Number 1: FSS Prince Eugen (1 Heavy Cruiser)
+   Fleet Number 2: KS Kagoshim (1 Heavy Cruiser)
+
+      On stardate 2983 a Federation Heavy Cruiser FSS Prince Eugen met, fought
+and eventually destroyed the Klargon Heavy Cruise KS Kagoshim, using superior
+tactics.
+      A single player can play either side, and this would also be a good two
+player scenario.
+
+
+                                 SCENARIO 5
+
+   Load: 5
+
+   Stardate: 2680
+
+   Fleet Number 1: KS Kaluga (1 Heavy Cruiser)
+   Fleet Number 2: Destroyer Squadron XXX (2 Destroyers)
+
+   Two Federation destroyers FSS Mitscher and FSS Battleaxe confronted the
+Klargon heavy cruiser KS Kaluga, but were unable to destroy her, before they
+were too damaged to continue the engagement.
+  
+
+                                 SCENARIO 6
+
+   Load: 6
+
+   Stardate: 2886
+
+   Fleet Number 1: FSS Enterprise (1 Heavy Cruiser)
+   Fleet Number 2: Federation Merchant Fleet (1 Space Station, 1 Fueler,
+                      3 Frieghters, 1 Transport, and 3 Tankers)
+   Fleet Number 3: Klargon Invasion Force (3 Destroyers, 3 Frigates, 1 Torpedo
+                      Craft, 2 Corvettes, 3 Patrollers)
+
+      This scenario is equivalent to the scenario from the classic 'STAR TREK'
+computer games. You are captain of the Federation Heavy Cruiser FSS Enterprise.
+Your mission is to destroy the invading Klargon fleet. You start out near Star
+Base FS #9 located at quadrant 10,10, sector 1,2.  In addition there is a
+Federation Fueler FSS Brezina located aprroxiamately 5 quadrants away on a
+bearing of 135. Your mission is urgent in that the Klargons are systematically
+destroying the numerous Federation merchant shipping in the area. An attack on
+the space station can only be expected. You will find that although a Heavy
+Cruiser is a powerful ship, it is inadequate for covering a large area single
+handedly. Shortly afterwards the Federation went to an age old tactic known as
+the 'convoy system' where merchant shipping was grouped together to facilitate
+the common defence. In addition a building program of numerous smaller vessals
+was began to counter the Klargon menace.
+      It is recommended that the computer control the Federation Merchant
+Fleet, as well as the Klargon INvasion Force.
+
+
+                                 SCENARIO 7
+
+   Load: 7
+
+   Stardate: 2976
+
+   Fleet Number 1: KS Kashgar (1 BattleCruiser)
+   Fleet Number 2: Cruiser Division Two (3 Light Cruisers)
+  
+      After careful deliberation the Federation decided to send 3 light
+cruisers to attack and destroy the Klargon Battlecruiser KS Kashgar that was
+menacing the quadrants of space near the Antaires IV reqion.
+
+
+                                 Scenario 8
+
+   Load: 8
+
+   Stardate: 2750
+
+   Fleet Number 1: FSS Agincourt (1 Dreadnought)
+   Fleet Number 2: KS Kisuma (1 Dreadnought)
+
+      In a rare occurance, on stardate 2750 a Federation dreadnought
+FSS Agincourt met and fought with the Klargon dreadnought KS Kisuma. You can
+recreate this famous battle that was an important turning point in Galactic
+War I.
+
+
+                                 Scenario 9
+
+   Load: 9
+
+   Stardate: 2531
+
+   Fleet Number 1: FSS Yamato (1 Dreadnought)
+   Fleet Number 2: Third Destruction Squadron (5 Destroyers)
+
+      The Federation dreadnought FSS Yamato successfully fought off 5 Klargon
+destroyers, using superior firepower, and by avoiding the hordes of torpedoes.
+
+
+                                 Scenario 10
+
+   Load: 10
+
+   Stardate: 2672
+
+   Fleet Number 1: FO Orion (1 Space Outpost)
+   Fleet Number 2: KS Kediri (1 Heavy Cruiser)
+   Fleet Number 3: Defence Force (3 Destroyers, 1 Frigate, 2 Torpedo Craft, 2
+                      Corvettes, 3 Patrollers)
+   Fleet Number 4: Support Force (1 Frigate, 1 Fueler, 1 Repair Ship)
+   Fleet Number 5: Merchant Fleet (4 Frieghters, 1 Transport, 2 Tankers)
+
+      On stardate 2672 the Klargon Heavy Cruiser Kediri penetrated deep into
+Federation territory and began destroying Federation merchant shipping. The
+Federation was caught off guard and had no heavy units in the area. Admiral
+Jameson assembled a hodge podge force of small combatants and destroyed the
+invader, earning for himself the Federation Legion of Honor.
+      It is recommended that the computer be assigned Fleets 2, and 5.
+Optionally a player may want to let the computer control fleets 1, and 4.
+
+
+                                 Scenario 11
+
+   Load: 11
+
+   Stardate: 2533
+
+   Fleet Number 1: FS #12 (1 Space Station)
+   Fleet Number 2: Invicible Strike Force (1 Dreadnought, 1 Heavy Cruiser)
+   Fleet Number 3: Battleship Division Six (1 Battleship, 1 BattleCruiser)
+   Fleet Number 4: Convoy Escort Force (1 Light Cruiser, 1 Destroyer,
+                      2 Frigates)
+   Fleet Number 5: Merchant Fleet Convoy (1 Frieghter, 1 Transport, and
+                      4 Tankers)
+
+      The Federation was seeking to resupply Starbase #12 when it was learned
+from Star Fleet Intelligence that the Klargons were going to attempt to destroy
+the supply convoy which might nessitate abandoning the starbase. Star Fleet
+Admiralty decided to send in a Battleship division to beef up the defence in
+the area. Wisely the Klargons decided to avoid combat with the battleship
+division and destroy the convoy. Results were mixed. Several merchant vessals
+were destroyed, but enough got through that the starbase stayed in operation.
+
+
+                                 Scenario 12
+
+   Load: 12
+
+   Stardate: 2844
+
+   Fleet Number 1: Main Battle Fleet (3 Dreadnoughts, 4 Battleships,
+                      2 BattleCruisers, 2 Frigates)
+   Fleet Number 2: Steller Imperium (3 Dreadnoughts, 2 Battleships,
+                      4 BattleCruisers, 2 Destroyers)
+
+      In the engagement that broke the back of the Klargon empire, the
+Federation Main Battle Fleet sortied to destroy the Klargon main fleet, the
+vaunted Steller Imperium. Fleet Admiral Nimu became a hero of the Federation
+by expertly divided the enemy column, and concentrating his forces, almost
+completely annhilating the Klargon fleet.
+
+
+                                 Scenario 13
+
+   Load: 13
+
+   Stardate: 2553
+
+   Fleet Number 1: Second Fleet (2 Dreadnoughts, 1 Battleship,
+                      3 Battlecruisers, 1 Heavy Cruiser, 1 Destroyer,
+                      1 Frigate, 1 Space Station)
+   Fleet Number 2: Galactic Imperium (2 Battleships, 2 Battlecruisers, 1 Light
+                      Cruiser, 1 Destroyer)
+   Fleet Number 3: Fleet Z-3 (2 Battleships, 2 BattleCruisers, 1 Light Cruiser,
+                      1 Frigate)
+
+      In an attempt to widen the war effort and to compensate for the loss of
+the Steller Imperium, the Klargons entered into a treaty with the Zornians, to
+jointly attack the Federation. This attack was designed to destroy Space
+Station #18 which was the homeport of the Federation Second Fleet. Admiral
+Fleer was able to defeat this threat by attacking each fleet seperately.
+
+

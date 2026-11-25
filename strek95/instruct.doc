@@ -1,0 +1,184 @@
+
+
+
+
+                         STAR TREK INSTRUCTIONS
+
+
+  You will be assigned a starting point somewhere in the galaxy to serve
+as commander of a starship. Your mission is to seek and destroy a fleet
+of Klingon warships that have invaded and are menacing The United Federation
+of Planets.
+
+  The galaxy is divided into an 8x8 quadrant grid, and each quadrant is
+further divided into an 8x8 sector grid. Quadrant 1,1 sector 1,1 is located
+in the top left corner.
+
+  You have the following commands available to you:
+
+  imp - Impule Engines. These short range engines are typically used
+        to manuever within a quadrant. You will be asked to give a
+        course. The standard courses are in a range between 000 and 359.
+        For example:
+
+                 000
+                  |
+                  |
+         270 --- <+> --- 090
+                  |
+                  |
+                 180
+
+        Next you will be asked to give an impulse factor. Each impulse
+        factor equals one sector. So for example to move from sector
+        5,5 to sector 5,4 you would select course 270 with an impulse
+        factor of 1.
+
+
+  srs - Short Range Sensors. Shows you a scan of your present quadrant.
+     
+        Symbology:
+
+          <+> - Your Starship
+          +K+ - Klingon Battle Cruiser
+          >!< - Federation Starbase
+           *  - Star
+
+        A condensed status report is also presented.
+
+
+  lrs - Long Range Sensors. 
+
+
+	Shows conditions in space one quadrant on each side of
+	the vessel, which is in the middle of the scan. The scan
+	is coded in the form of \###\ where the units digit is
+	the number of stars, the tens digit os the number of
+	starbases, and the hundreds digit is the number of ships.
+
+	For example:
+
+          Long range sensor scan for quadrant 01, 07:
+
+          |-----|-----|-----|
+          | 000 | 000 | 000 |
+          |-----|-----|-----|
+          | 101 | 213 | 005 |
+          |-----|-----|-----|
+          | 005 | 002 | 005 |
+          |-----|-----|-----|
+
+	In quadrant 01, 07 the code is 213 which means there are
+	2 ships (your ship, and one enemy), one station, and
+	three stars. The 000 code is outside the known galaxy.
+
+  pha - Phasers.
+
+	Allows you to destroy enemy ships by zapping them with
+	suitably large units of energy.
+
+	Example:
+
+          Energy Available: 3700
+
+          Energy to Phasers: 100  <- You enter.
+
+          60 unit hit on Klingon Battlecruiser at sector 5, 4
+
+
+  tor - Photon Torpedoes
+
+	A projectile weapon that travels a certain course to hit
+	your enemy. Courses are the same as when navigating.
+        After you fire a track will be displayed so you know
+	where your torpedo went.
+
+	Example:
+
+          Torpedo Course: 270  <- You enter.
+
+          Torpedo Track:
+             3 8
+             3 7
+             3 6
+             3 5
+             3 4
+             3 3
+             3 2
+             3 1
+           Torpedo Missed
+
+
+  she - Shield Control
+
+        Defines the number of energy units to be assigned to the
+	shields. Energy is taken from the ship's total energy.
+
+	Example:
+
+          Shield Control
+
+          Energy Available for Shields = 4074
+
+          Amount of energy to shields: 1000  <- You enter.
+
+          Weapons Officer reports:
+            Shields now at 1000 units per your command, sir.
+
+
+  dam - Damage Control
+
+	Gives the state of repair for all equipment. A
+	status of less than 100 indicates damage.
+
+	Example:
+
+          Damage Control Report for Tiger:
+
+            DEVICE               STATUS
+          Impulse Engines         100
+          Warp Engines            100
+          Scanners                100
+          Short Range Sensors     100
+          Long Range Sensors       83
+          Phasers                 100
+          Photon Torpedoes        100
+          Damage Control          100
+          Shields                 100
+          Library Computer        100
+
+
+  wrp - Warp Engines
+
+        Warp engines are exactly like impulse engines except that you
+        move one whole quadrant instead of one whole sector per
+        factor.
+
+  com - Library Computer.
+
+        Your onboard computer system. It has seven commands:
+
+        cgr  - Cumulative Galactic Record. Shows computer memory
+	       of all previous long and short range sensor scans.
+
+        ddc  - Direction and Distance Calculator. Given two
+	       locations will provide direction and distance
+	       (speed required) to get there.
+
+        exit - Exit Computer.
+
+        loc  - Location Calculator. Given a location, course, and
+	       speed, will provide new location.
+
+        nav  - Starbase Navigation Data. Gives a recommended
+	       course and speed to dock your ship.
+
+        sta  - Status Report. Provides a detailed status report
+	       of your situation and performance.
+
+        tor  - Torpedo Course Calculator. Gives a recommended
+	       course to aim torpedos.
+
+  Good Luck!
+
+
