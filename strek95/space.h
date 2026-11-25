@@ -23,8 +23,6 @@
  *
  *    Chris Nystrom
  *
- *    E-Mail: chris@gnu.ai.mit.edu, nystrom@cactus.org, or ccn@cfi.org
- *
  */
 
 #define QUADSIZE	8    /* Number of sectors in a quadrant */

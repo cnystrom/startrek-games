@@ -24,7 +24,7 @@
  *
  * Chris Nystrom
  *
- * E-Mail: cnystrom@gmail.com, nystrom@cactus.org
+ * E-Mail: cnystrom@gmail.com
  *
  * BASIC -> Conversion Issues
  *

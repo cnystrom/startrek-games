@@ -23,8 +23,6 @@
  *
  *    Chris Nystrom
  *
- *    E-Mail: chris@gnu.ai.mit.edu, nystrom@cactus.org, or ccn@cfi.org
- *
  */
 
 char * quadrant_name(int z4, int z5);

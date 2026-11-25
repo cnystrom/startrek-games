@@ -25,8 +25,6 @@
  *
  * Chris Nystrom
  *
- * E-Mail: chris@gnu.ai.mit.edu, nystrom@cactus.org, or ccn@cfi.org
- *
  * BASIC -> Conversion Issues
  *
  *     - String Names changed from A$ to sA
