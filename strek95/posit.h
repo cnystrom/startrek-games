@@ -1,7 +1,7 @@
 /*
  *    posit.h
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -52,4 +52,6 @@ void new_posit(void);
 vector compute_dirdist (posit posP1, posit posP2);
 posit course_spd (posit posP, int iCourse, int iVelocity);
 void course_display(void);
+int in_galaxy(posit posP);
+posit clamp_to_galaxy(posit posP);
 

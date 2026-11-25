@@ -1,7 +1,7 @@
 /*
  *    nav.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -49,7 +49,7 @@ void
 impulse_engines(void)
 {
   int iCourse, iVelocity, iEnergy;
-  string s;
+  double d;
 
   if (damaged(IMPULSE_ENGINES))
     {
@@ -60,20 +60,21 @@ impulse_engines(void)
 
   course_display();
 
-  get_string("Course: ", s);
-
-  iCourse = atoi(s);
-
-  if (iCourse < 0 || iCourse > 360)
+  if (! get_number("Course: ", &d) || d < 0 || d > 360)
     {
       printf("\nConning Officer reports:\n");
       printf("  Invalid course, sir.\n\n");
       return;
     }
+  iCourse = (int) d;
 
-  get_string("Impulse Factor: ", s);
-
-  iVelocity = (int)(atof(s));
+  if (! get_number("Impulse Factor: ", &d) || d < 0 || d > 8)
+    {
+      printf("\nChief Engineer reports:\n  The impulse engines can not");
+      printf(" do that impulse factor, sir.\n\n");
+      return;
+    }
+  iVelocity = (int) d;
 
   printf("\n");
 
@@ -93,7 +94,7 @@ impulse_engines(void)
       return;
     }
 
-  add_stardate(iVelocity / 10);
+  add_stardate(iVelocity / 10.0);
 
   nav(iCourse, iVelocity);
 }
@@ -102,8 +103,7 @@ void
 warp_engines(void)
 {
   int iCourse, iVelocity, iEnergy;
-  float fVelocity;
-  string s;
+  double d;
 
   if (damaged(WARP_ENGINES))
     {
@@ -114,24 +114,24 @@ warp_engines(void)
 
   course_display();
 
-  get_string("Course: ", s);
-
-  iCourse = atoi(s);
-
-  if (iCourse < 0 || iCourse > 360)
+  if (! get_number("Course: ", &d) || d < 0 || d > 360)
     {
       printf("\nConning Officer reports:\n");
       printf("  Invalid course, sir.\n\n");
       return;
     }
+  iCourse = (int) d;
 
-  get_string("Warp Factor: ", s);
-
-  fVelocity = atof(s);
+  if (! get_number("Warp Factor: ", &d) || d < 0 || d > 8)
+    {
+      printf("\nChief Engineer reports:\n  The warp engines can not take");
+      printf(" that warp factor, sir.\n\n");
+      return;
+    }
 
   printf("\n");
 
-  iVelocity = (int)(fVelocity * QUADSIZE);
+  iVelocity = (int)(d * QUADSIZE);
 
   iEnergy = get_energy();
 
@@ -157,7 +157,7 @@ warp_engines(void)
 void
 nav(int iCourse, int iVelocity)
 {
-  register i, j;
+  register int i, j;
   int iQ1, iQ2;
   posit posit, posP;
 
@@ -173,6 +173,15 @@ nav(int iCourse, int iVelocity)
 
       posP = course_spd(posit, iCourse, 1);
 
+      if (! in_galaxy(posP))
+        {
+          /* Stop at the edge of the galaxy, as the BASIC game does */
+          printf("Lt. Uhura reports message from Starfleet Command:\n");
+          printf("  Permission to attempt crossing of galactic perimeter\n");
+          printf("  is hereby *denied*. Shut down your engines.\n\n");
+          break;
+        }
+
       if ((posit.iXQuad != posP.iXQuad) || (posit.iYQuad != posP.iYQuad))
         {
           iQ1 = posit.iXQuad;
@@ -184,6 +193,15 @@ nav(int iCourse, int iVelocity)
           /* Move ship the rest of the way all at once */
 
           posP = course_spd(posit, iCourse, iVelocity - i);
+          if (! in_galaxy(posP))
+            {
+              printf("Lt. Uhura reports message from Starfleet Command:\n");
+              printf("  Permission to attempt crossing of galactic perimeter\n");
+              printf("  is hereby *denied*. Shut down your engines.\n\n");
+              posP = clamp_to_galaxy(posP);
+            }
+          posP.fXSect = (int) posP.fXSect;  /* whole sectors, like BASIC */
+          posP.fYSect = (int) posP.fYSect;
           i = iVelocity;
 
           iQ1 = posP.iXQuad;
@@ -218,8 +236,10 @@ nav(int iCourse, int iVelocity)
                   printf("Conning Officer reports:\n");
 	          printf("  Engines shutdown to avoid Klingon, sir.\n\n");
                 }
-              set_space((int) posit.fXSect, (int) posit.fYSect, SHIP);
-              return;
+              /* Stop here, but still fall through to the docking and
+                 condition update below: returning early left the ship
+                 "Docked" after it had moved away from the starbase */
+              break;
             }
           else
             {
@@ -229,6 +249,14 @@ nav(int iCourse, int iVelocity)
             }
         }
     }
+
+  /* Finish on a whole sector so the display, torpedoes and docking
+     all agree on where the ship is */
+  posit = get_posit();
+  posit.fXSect = (int) posit.fXSect;
+  posit.fYSect = (int) posit.fYSect;
+  set_posit(posit);
+  set_space((int) posit.fXSect, (int) posit.fYSect, SHIP);
 
   check_dock();
   set_condition();

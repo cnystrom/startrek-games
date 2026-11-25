@@ -13,8 +13,10 @@ games, kept so those are not duplicated as a second `startrek` repo.
   "a new re-write of the classic game." The original README calls it a
   total re-write in C of the Super Star Trek game from David Ahl's
   *BASIC Computer Games* (1978), with added features such as impulse
-  engines, ranks, and sound. Sources are dated 1995. Byte-identical to
-  the `strek95.tgz` on the old programs site.
+  engines, ranks, and sound. Sources are dated 1995. Now at v1.1, a
+  bug-fix release (see `strek95/README` for the changes). The original
+  1995 code, byte-identical to the `strek95.tgz` on the old programs
+  site, is preserved at the git tag `strek95-orig`.
 - **startrek-classic-v1.0/** — Super Star Trek Classic (v1.0), the 1996
   C port as published on cactus.org and as packed in `startrek.tgz`.
   This tree is byte-identical to the `startrek.tgz` on the old programs
@@ -80,11 +82,10 @@ See LICENSE for the terms of each tree in this repository.
   program defines its own `getline`. Both build with
   `gcc -std=c89 -O0 startrek.c -o startrek -lm`. There are warnings
   about the old `gets()` calls. The code was not modified.
-- **strek95**: the Makefile names the compiler `acc`. As written, `make`
-  fails here (`acc` not found). It builds with
-  `make CC=gcc CFLAGS="-std=c89 -g"` and links with `-lm`. Default gcc
-  (no `-std=c89`) fails on implicit `int`. The Makefile in the tree was
-  not edited.
+- **strek95** (v1.1): `make` builds it with `cc`. It compiles cleanly
+  with gcc and clang in C89 and default modes. The original 1995 tree
+  (tag `strek95-orig`) named the compiler `acc` and needs
+  `make CC=gcc CFLAGS="-std=c89 -g"`.
 - **niotrek**: does not compile standalone; it expects NIO headers
   (`nio_lib.h`).
 - **starbas**: QuickBASIC / DOS sources; not compiled here.

@@ -1,7 +1,7 @@
 /*
  *    space.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -125,7 +125,7 @@ free_space(int iObject)
 void
 new_space(int iXQuad, int iYQuad)
 {
-  register i, j;
+  register int i, j;
   int iGalaxy, iShips, iK, iS;
   posit posit;
 
@@ -181,6 +181,10 @@ move_klingon(int iKNum)
   sub_klingon_space(klingon.iXSect, klingon.iYSect);
 
   iKIndex = iKNum;
-  free_space(KLINGON); 
+  free_space(KLINGON);
+
+  /* free_space() -> set_klingon() resets energy to 300; keep the
+     damage the Klingon has already taken */
+  set_klingon_energy(iKNum, klingon.iEnergy);
 }
 

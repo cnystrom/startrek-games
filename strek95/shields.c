@@ -1,7 +1,7 @@
 /*
  *    shields.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -37,7 +37,7 @@
 void
 shield_control(void)
 {
-  string s;
+  double d;
 
   int iEnergy = get_energy();
   int iShields = get_shields();
@@ -55,11 +55,16 @@ shield_control(void)
   printf("Shield Control\n\n");
   printf("Energy Available for Shields = %d\n\n", iEnergy);
 
-  get_string("Amount of energy to shields: ", s);
+  if (! get_number("Amount of energy to shields: ", &d))
+    {
+      printf("\nWeapons Officer reports:\n");
+      printf("  Shields unchanged, sir.\n\n");
+      return;
+    }
 
   printf("\n");
 
-  iShields = atoi(s);
+  iShields = (d > iEnergy) ? iEnergy : (int) d;
 
   if (iShields > iEnergy)
      iShields = iEnergy;

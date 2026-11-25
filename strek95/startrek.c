@@ -1,7 +1,7 @@
 /*
  *    startrek.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -66,17 +66,18 @@ extern void short_range_sensors(void);
 extern void photon_torpedoes(void);
 extern void warp_engines(void);
 
-void
+int
 main (void)
 {
   intro (); 
   new_game();
+  return 0;
 }
 
 void
 intro (void)
 {
-  printf("Super Star Trek 95, Copyright (C) 1995 Chris Nystrom\n");
+  printf("Super Star Trek 95 v1.1, Copyright (C) 1995 Chris Nystrom\n");
   printf("Super Star Trek 95 comes with ABSOLUTELY NO WARRANTY\n");
   printf("This is free software, and you are welcome to redistribute it\n");
   printf("under certain conditions: type `copying' at the main menu for\n");
@@ -103,7 +104,6 @@ intro (void)
 
   instructions();
   randomize();
-  new_stardate();
   new_score();
   select_rank();
   set_name();
@@ -118,6 +118,7 @@ new_game(void)
   
   iRank = get_rank();
 
+  new_stardate();
   new_damage();
   new_ship(iRank);
   new_galaxy(iRank);
@@ -226,7 +227,7 @@ new_game(void)
 	impulse_engines();
 
       else if (strncmp (sCommand,"ins",3) == 0)
-	showfile("startrek.doc");
+	showfile("instruct.doc");
 
       else if (strncmp (sCommand,"lrs",3) == 0)
         long_range_sensors();

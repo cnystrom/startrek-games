@@ -1,7 +1,7 @@
 /*
  *    klingon.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -97,7 +97,7 @@ del_klingon(int iXSect, int iYSect)
 void
 klingons_move(void)
 {
-  register i;
+  register int i;
 
   for (i = 1; i <= MAX_KLINGONS_QUAD; i++)
     if (get_rand(100) > 80)
@@ -107,7 +107,7 @@ klingons_move(void)
 void
 klingons_fire(void)
 {
-  register i, j;
+  register int i, j;
   int iEnergy, iShot, iShields, iDevice, iDamage, iCount;
   klingon klingon;
 
@@ -143,8 +143,8 @@ klingons_fire(void)
               iDamage = get_damage(iDevice) - iShot;
               if (iDamage < 0)
                 iDamage = 0;
+              sub_score(get_damage(iDevice) - iDamage);  /* damage done */
               set_damage(iDevice, iDamage);
-              sub_score(iDamage);
               printf("Damage Control Reports:\n %s damaged by the hit.\n\n",
                 get_device_name(iDevice));
               beep();

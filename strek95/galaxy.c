@@ -1,7 +1,7 @@
 /*
  *    galaxy.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -77,9 +77,10 @@ void
 add_ship_galaxy(int iXQuad, int iYQuad)
 {
   if (iXQuad > 0 && iXQuad <= GALSIZE && iYQuad > 0 && iYQuad <= GALSIZE)
-    iGalaxy[iXQuad][iYQuad] = iGalaxy[iXQuad][iYQuad] + 100;
-
-  iTotShips++;
+    {
+      iGalaxy[iXQuad][iYQuad] = iGalaxy[iXQuad][iYQuad] + 100;
+      iTotShips++;
+    }
 }
 
 void
@@ -182,7 +183,7 @@ free_quad(int iType)
 void
 new_galaxy(int iRank)
 {
-  register i, j;
+  register int i, j;
   int k, iStations;
   posit posit;
 

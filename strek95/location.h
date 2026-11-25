@@ -1,7 +1,7 @@
 /*
  *    location.h
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -28,11 +28,11 @@
  */
 
 #ifndef PI
-#define PI	 3.14
+#define PI	 3.14159265358979
 #endif
 
 #ifndef CONV
-#define CONV	57.29
+#define CONV	57.2957795130823
 #endif
 
 struct location_struct

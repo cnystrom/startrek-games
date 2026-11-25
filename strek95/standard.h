@@ -1,7 +1,7 @@
 /*
  *    standard.h
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -32,7 +32,7 @@
 #endif
 
 #ifndef TRUE
-#define TRUE         ! FALSE
+#define TRUE         1
 #endif
 
 #define NUL          0
@@ -88,7 +88,9 @@
 
 /* Useful typedefs */
 
-typedef int bool;
+#if !defined(__STDC_VERSION__) || __STDC_VERSION__ < 202000L
+typedef int bool;   /* bool is a keyword from C23 on */
+#endif
 typedef char line[MAXCOL];
 typedef char string[MAXLEN];
 
@@ -97,6 +99,8 @@ typedef char string[MAXLEN];
 int y_or_n(char *s);
 void itoa(int n, char s[]);
 int get_string(char *s1, char *s2);
+void read_line(char *s, int size);
+int get_number(char *prompt, double *d);
 void pause (void);
 void showfile(char *filename);
 int cint(double d);

@@ -1,7 +1,7 @@
 /*
  *   disk_io.h
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -33,4 +33,4 @@ void write_int(int *i);
 void read_int(int *i);
 void write_int_array(int *array, int iSize);
 void read_int_array(int *array, int iSize);
-int getline(char *s);
+int read_file_line(char *s);

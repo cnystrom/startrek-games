@@ -1,7 +1,7 @@
 /*
  *    phasers.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -47,9 +47,9 @@ void hit_klingon(int iKlingonNum, int iEnergy);
 void
 phasers(void)
 {
-  register i;
+  register int i;
   int iEnergy, iEnergyAvail, iDamage, iKlingons, iPotentialDamage;
-  string s;
+  double d;
   klingon klingon;
   posit pos1, pos2;
   vector v;
@@ -82,14 +82,14 @@ phasers(void)
     }
   printf("Energy Available: %d\n\n", iEnergyAvail);
 
-  get_string("Energy to Phasers: ", s);
+  if (! get_number("Energy to Phasers: ", &d) || d < 1)
+    return;
 
   printf("\n");
 
-  iEnergy = atoi(s);
-
-  if (iEnergy <= 0)
-    return;
+  if (d > iEnergyAvail)
+    d = iEnergyAvail + 1;   /* refused just below */
+  iEnergy = (int) d;
 
   if (iEnergy > iEnergyAvail)
     {
@@ -140,7 +140,7 @@ hit_klingon(int iKlingonNum, int iEnergy)
 
   i = klingon.iEnergy - iEnergy;
 
-  if (i < 0)
+  if (i <= 0)
     {
       iXSect = klingon.iXSect;
       iYSect = klingon.iYSect;

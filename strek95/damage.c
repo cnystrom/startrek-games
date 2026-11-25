@@ -1,7 +1,7 @@
 /*
  *    damage.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -40,7 +40,7 @@ int damage[DEVICE_TOT];
 void
 new_damage(void)
 {
-  register i;
+  register int i;
 
   for  (i = 0; i < DEVICE_TOT; i++)
     set_damage(i, OPERATIONAL);
@@ -97,7 +97,7 @@ repair_damage(void)
 void
 at_shipyard(void)
 {
-  register i;
+  register int i;
   char c;
   int iActual, iDamageTot = 0;
   float fEstimate;

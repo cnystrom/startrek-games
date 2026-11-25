@@ -12,7 +12,7 @@
 #CC	= cc
 #CC	= c89
 #CC	= gcc
-CC	= acc
+CC	= cc
 CFLAGS	= -g 
 #CFLAGS	= -O 
 #CFLAGS	= -O -Wall -g

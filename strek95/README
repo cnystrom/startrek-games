@@ -1,3 +1,46 @@
+Super Star Trek 95 v1.1 (2026 bug-fix release)
+==============================================
+
+The original 1995 v1.0 code is kept unchanged in git at the tag
+"strek95-orig". Version 1.1 fixes bugs only; the game rules and
+balance are the same. Build with "make" (or "make CC=gcc").
+
+Changes in v1.1:
+
+ - You can no longer fly off the edge of the galaxy. Doing so used to
+   add a "ghost" Klingon that could never be destroyed, so the game
+   could not be won.
+ - Fixed a phantom starbase: sector 1,1 of any quadrant without a base
+   used to dock, refuel and protect the ship.
+ - A destroyed starbase no longer refuels you or shows up on scans.
+ - The computer's torpedo course now hits the target. About a third of
+   its suggested shots used to miss (e.g. 134 instead of 135).
+ - Torpedoes no longer slide along the bottom row of a quadrant.
+ - Fixed a crash and garbage text in the Galactic Region Map and the
+   "Now entering ..." quadrant names.
+ - All input is read safely: no more gets() buffer overflows, and the
+   game exits cleanly at end of input instead of looping forever.
+ - Out-of-range or junk input (e.g. "nan", "abc", course 500) is
+   refused instead of crashing, dropping shields, or flying north.
+ - A Klingon that moves keeps its damage instead of healing to full.
+ - Leaving a starbase and stopping at a star no longer leaves the ship
+   "Docked" (and shielded by the base).
+ - The ship always sits on a whole sector, so the sensor display,
+   torpedoes and docking agree on where it is.
+ - Impulse travel now takes time (0.1 stardate per factor), as the
+   integer division always made it 0.
+ - A Klingon hit down to exactly 0 energy is now destroyed.
+ - The score penalty for a damaging hit now uses the damage taken.
+ - The "ins" command shows instruct.doc (it looked for a missing file).
+ - Starbases are drawn as >!< as described in instruct.doc.
+ - Smaller fixes: files are closed after reading, the rating restarts
+   with each new game, and several off-by-one checks were corrected.
+ - Builds cleanly with modern gcc and clang (C89 through C23); the
+   Makefile now uses "cc" instead of "acc".
+
+Original README follows.
+----------------------------------------------------------------------
+
 
 This is an original remake of an old BASIC program. It comes from the
 classic book _BASIC Computer Games_ edited by David Ahl of Creative

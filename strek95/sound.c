@@ -1,7 +1,7 @@
 /*
  *    sound.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -42,7 +42,9 @@
 #define BEL          7
 #endif
 
-typedef int bool;
+#if !defined(__STDC_VERSION__) || __STDC_VERSION__ < 202000L
+typedef int bool;   /* bool is a keyword from C23 on */
+#endif
 
 bool iSound=TRUE;
 

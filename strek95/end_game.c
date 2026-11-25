@@ -1,7 +1,7 @@
 /*
  *    end_game.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -29,6 +29,7 @@
  
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "standard.h"
 #include "stardate.h"
 #include "rank.h"
@@ -114,7 +115,7 @@ end_game(void)
       printf("If there is a volunteer, let him step forward and");
       printf(" enter 'aye': ");
 
-      gets(sTemp);
+      read_line(sTemp, sizeof sTemp);
       printf("\n");
 
       if (! strncmp(sTemp, "aye", 3))

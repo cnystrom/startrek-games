@@ -1,7 +1,7 @@
 /*
  *    dc.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -37,7 +37,7 @@ void
 do_dc (void)
 {
   char sDeviceName[81] = "";
-  register i, j;
+  register int i, j;
 
   if (damaged(DAMAGE_CONTROL))
     {

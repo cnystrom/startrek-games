@@ -1,7 +1,7 @@
 /*
  *    galrec.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -36,7 +36,7 @@ int iGalRec[GALSIZE + 1][GALSIZE + 1];
 void
 new_galrec(void)
   {
-    register i, j;
+    register int i, j;
 
     for (i = 0; i <= GALSIZE; i++)
       for (j = 0; j <= GALSIZE; j++)
@@ -59,12 +59,12 @@ get_galrec(int i, int j)
 void
 write_galrec(FILE *stream)
   {
-    fwrite (iGalRec, sizeof (int), (GALSIZE +1) ^ 2, stream);
+    fwrite (iGalRec, sizeof (int), (GALSIZE + 1) * (GALSIZE + 1), stream);
   }
 
 void
 read_galrec(FILE *stream)
   {
-    fread (iGalRec, sizeof (int), (GALSIZE + 1) ^ 2, stream);
+    fread (iGalRec, sizeof (int), (GALSIZE + 1) * (GALSIZE + 1), stream);
   }
 

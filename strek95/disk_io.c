@@ -1,7 +1,7 @@
 /*
  *    disk_io.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -43,7 +43,9 @@
 #define MAXCOL  80
 #endif
 
-typedef int bool;
+#if !defined(__STDC_VERSION__) || __STDC_VERSION__ < 202000L
+typedef int bool;   /* bool is a keyword from C23 on */
+#endif
 
 FILE *stream;
 bool bFlag = FALSE;   /* Prevent multiple file opens */
@@ -65,14 +67,14 @@ openfile(char * sFilename, char * sMode)
 void
 closefile(void)
 {
-  if (! bFlag)
+  if (bFlag)
     fclose(stream);
 
   bFlag = FALSE;
 }
 
 int
-getline(char *s)
+read_file_line(char *s)
 {
   if (fgets(s, MAXCOL, stream) == NULL)
     return(0);
@@ -98,12 +100,12 @@ read_int(int *i)
 void
 write_int_array(int *array, int iSize)
 {
-  fwrite (array, sizeof (int), iSize ^ 2, stream);
+  fwrite (array, sizeof (int), iSize * iSize, stream);
 }
 
 void
 read_int_array(int *array, int iSize)
 {
-  fread (array, sizeof (int), iSize ^ 2, stream);
+  fread (array, sizeof (int), iSize * iSize, stream);
 }
 

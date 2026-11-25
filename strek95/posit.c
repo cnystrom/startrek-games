@@ -1,7 +1,7 @@
 /*
  *    posit.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -29,6 +29,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "location.h"
 #include "standard.h"
 #include "galaxy.h"
@@ -107,27 +108,47 @@ course_spd (posit posP, int iCourse, int iVelocity)
   x = l2.fX;
   y = l2.fY;
   
-  a2 = (((int) x) / QUADSIZE) + 1;
-  b2 = (((int) y) / QUADSIZE) + 1;
+  /* Sector s of quadrant q sits at (q-1)*QUADSIZE + s, s in [1, 9),
+     so positions between sector 8 and the next quadrant's sector 1
+     belong to sector 8 of this quadrant, and negative positions
+     round down (floor), not toward zero. */
+
+  a2 = (int) floor((x - 1.0) / QUADSIZE) + 1;
+  b2 = (int) floor((y - 1.0) / QUADSIZE) + 1;
 
   x2 = (x - (float) ((a2 - 1) * QUADSIZE));
-  if ((int) x2 <= 0)
-    {
-      x2 = QUADSIZE;
-      a2 = a2 - 1;
-    }
   y2 = (y - (float) ((b2 - 1) * QUADSIZE));
-  if ((int) y2 <= 0)
-    {
-      y2 = QUADSIZE;
-      b2 = b2 - 1;
-    }
   posRet.iXQuad = a2;
   posRet.iYQuad = b2;
   posRet.fXSect = x2;
   posRet.fYSect = y2;
 
   return posRet;
+}
+
+/* Is the position inside the galaxy? */
+int
+in_galaxy(posit posP)
+{
+  return (posP.iXQuad >= 1 && posP.iXQuad <= GALSIZE &&
+          posP.iYQuad >= 1 && posP.iYQuad <= GALSIZE);
+}
+
+/* Pull a position back to the nearest point inside the galaxy */
+posit
+clamp_to_galaxy(posit posP)
+{
+  if (posP.iXQuad < 1)
+    { posP.iXQuad = 1; posP.fXSect = 1; }
+  else if (posP.iXQuad > GALSIZE)
+    { posP.iXQuad = GALSIZE; posP.fXSect = QUADSIZE; }
+
+  if (posP.iYQuad < 1)
+    { posP.iYQuad = 1; posP.fYSect = 1; }
+  else if (posP.iYQuad > GALSIZE)
+    { posP.iYQuad = GALSIZE; posP.fYSect = QUADSIZE; }
+
+  return posP;
 }
 
 void

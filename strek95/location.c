@@ -1,7 +1,7 @@
 /*
  *    location.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -28,6 +28,7 @@
  */
 
 #include <math.h>
+#include <stdlib.h>
 #include "location.h"
 
 vector
@@ -42,51 +43,39 @@ compute_vector(location l1, location l2)
   x3 = l2.fX;
   y3 = l2.fY;
 
-  x = y3 - b;
-  y = a - x3;
+  /* Work out the course that resolve_vector() will actually fly.
+     Movement is "box" shaped (see resolve_vector), not circular, so
+     a true trigonometric angle (atan) points slightly off target for
+     most shots.  Invert the box interpolation instead. */
 
-  if (x == 0)
-    {
-      if (y > 0)
-	dTemp = PI / 2.0;
-      else if (y < 0)
-	dTemp = -PI / 2.0;
-      else
-	dTemp = 0.0;
-    }
-  else if (y == 0)
-    {
-      if (x < 0)
-	dTemp = PI;
-      else
-	dTemp = 0.0;
-    }
+  x = x3 - a;            /* rows: positive is down (course 180)   */
+  y = y3 - b;            /* columns: positive is right (course 90) */
+  dTemp = fabs(x) > fabs(y) ? fabs(x) : fabs(y);
+
+  if (dTemp == 0.0)
+    dTemp = 0.0;                         /* same spot: no course */
   else
     {
-      if (x < 0)
-	{
-	  if (y > 0)
-	    dTemp = atan (y / x) + PI;
-	  else
-	    dTemp = atan (y / x) - PI;
-	}
-      else 
-	dTemp = atan (y / x);
+      x = x / dTemp;                     /* now one of x, y is +-1 */
+      y = y / dTemp;
+      if (x <= -1.0 && y >= 0.0)
+        dTemp = 45.0 * y;                /* 000 - 045 */
+      else if (y >= 1.0)
+        dTemp = 90.0 + 45.0 * x;         /* 045 - 135 */
+      else if (x >= 1.0)
+        dTemp = 180.0 - 45.0 * y;        /* 135 - 225 */
+      else if (y <= -1.0)
+        dTemp = 270.0 - 45.0 * x;        /* 225 - 315 */
+      else
+        dTemp = 360.0 + 45.0 * y;        /* 315 - 360 */
     }
 
-  dTemp = dTemp * CONV;
-  dTemp = 90.0 - dTemp;
+  v.iDir = (int) (dTemp + 0.5);          /* round, don't truncate */
+  if (v.iDir >= 360)
+    v.iDir -= 360;
 
-  if (dTemp < 0.0)
-    dTemp += 360.0;
-
-  if (dTemp == 360.0)
-    dTemp = 0.0;
-
-  v.iDir = (int) dTemp;
-
-  a3 = fabs(a - x3);
-  b3 = fabs(b - y3);
+  a3 = abs(a - x3);
+  b3 = abs(b - y3);
 
   if (a3 > b3)
     v.iDist = a3;
@@ -138,6 +127,11 @@ resolve_vector (location l, vector v)
     {-1, -1, 0, 1, 1, 1, 0, -1, -1, -1,},
     {0, 1, 1, 1, 0, -1, -1, -1, 0, 0}
   };
+
+  /* Keep the course in 0..359 so the table lookup stays in bounds */
+  v.iDir %= 360;
+  if (v.iDir < 0)
+    v.iDir += 360;
 
   cs = (float) (v.iDir / 45.0);
   cs2 = ((int) cs);

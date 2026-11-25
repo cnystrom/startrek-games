@@ -1,7 +1,7 @@
 /*
  *    ship.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -207,7 +207,7 @@ next_to_station(void)
   posit = get_posit();
   starbase = get_starbase();
 
-  if (starbase.iEnergy)
+  if (starbase.iEnergy > 0)   /* no base here is -1, which is "true" */
     {
       iA = (int) posit.fXSect;
       iB = (int) posit.fYSect;

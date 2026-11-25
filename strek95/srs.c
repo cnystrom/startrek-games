@@ -1,7 +1,7 @@
 /*
  *    srs.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -42,7 +42,7 @@
 void
 short_range_sensors(void)
 {
-  register i, j;
+  register int i, j;
   int iObject;
   posit posit = get_posit();
 
@@ -81,11 +81,11 @@ short_range_sensors(void)
               if (damaged(SHORT_RANGE_SENSORS))
                 printf("   ");
               else if (iObject == SHIP)
-                printf(get_image(get_shiptype()));
+                fputs(get_image(get_shiptype()), stdout);
               else if (iObject == KLINGON)
                 printf("+K+");
               else if (iObject == STATION)
-                printf(">?<");
+                printf(">!<");
               else if (iObject == STAR)
                 printf(" * ");
               else
@@ -100,8 +100,8 @@ short_range_sensors(void)
       else if (i == 3)
          printf("  Quadrant:   %d, %d\n", posit.iXQuad, posit.iYQuad);
       else if (i == 4)
-         printf("  Sector:     %d, %d\n", cint(posit.fXSect),
-         cint(posit.fYSect));
+         printf("  Sector:     %d, %d\n", (int) posit.fXSect,
+         (int) posit.fYSect);
       else if (i == 5)
          printf("  Torpedoes:  %d\n", get_torpedoes());
       else if (i == 6)

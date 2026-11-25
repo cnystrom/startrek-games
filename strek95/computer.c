@@ -1,7 +1,7 @@
 /*
  *    computer.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -51,6 +51,18 @@ void starbase_nav(void);
 void status_report(void);
 void torp_calc(void);
 void location_calc(void);
+
+/* Keep calculator input in a sane range (also turns NaN into 0) so the
+   float-to-int conversions below are defined. */
+static double
+clamp_input(double d)
+{
+  if (!(d > -1000.0))
+    return (d < 0.0) ? -1000.0 : 0.0;
+  if (d > 1000.0)
+    return 1000.0;
+  return d;
+}
 
 void
 computer(void)
@@ -125,7 +137,7 @@ show_computer_menu(void)
 void
 galactic_record(int iMap)
 {
-  register i, j;
+  register int i, j;
   int k;
   int iXIndex, iYIndex, iDisplaySize = 9;
   posit posit = get_posit();
@@ -261,7 +273,7 @@ status_report(void)
 void
 torp_calc(void)
 {
-  register i;
+  register int i;
   posit p1, p2;
   klingon klingon;
   vector v;
@@ -310,16 +322,20 @@ dd_calc(void)
   printf("Direction Distance Calculator\n\n");
 
   printf("Input 1st X-Coordinate: ");
-  l1.fX = atof(gets(sBuffer));
+  read_line(sBuffer, sizeof sBuffer);
+  l1.fX = clamp_input(atof(sBuffer));
   printf("Input 1st Y-Coordinate: ");
-  l1.fY = atof(gets(sBuffer));
+  read_line(sBuffer, sizeof sBuffer);
+  l1.fY = clamp_input(atof(sBuffer));
 
   printf("\n");
 
   printf("Input 2nd X-Coordinate: ");
-  l2.fX = atof(gets(sBuffer));
+  read_line(sBuffer, sizeof sBuffer);
+  l2.fX = clamp_input(atof(sBuffer));
   printf("Input 2nd Y-Coordinate: ");
-  l2.fY = atof(gets(sBuffer));
+  read_line(sBuffer, sizeof sBuffer);
+  l2.fY = clamp_input(atof(sBuffer));
 
   v = compute_vector(l1, l2);
 
@@ -337,14 +353,18 @@ location_calc(void)
   printf("Location Calculator\n\n");
 
   printf("Input X-Coordinate: ");
-  l.fX = atof(gets(sBuffer));
+  read_line(sBuffer, sizeof sBuffer);
+  l.fX = clamp_input(atof(sBuffer));
   printf("Input Y-Coordinate: ");
-  l.fY = atof(gets(sBuffer));
+  read_line(sBuffer, sizeof sBuffer);
+  l.fY = clamp_input(atof(sBuffer));
 
   printf("\nInput Course: ");
-  v.iDir = atof(gets(sBuffer));
+  read_line(sBuffer, sizeof sBuffer);
+  v.iDir = clamp_input(atof(sBuffer));
   printf("Input Speed: ");
-  v.iDist = atof(gets(sBuffer));
+  read_line(sBuffer, sizeof sBuffer);
+  v.iDist = clamp_input(atof(sBuffer));
 
   l = resolve_vector(l, v);
 

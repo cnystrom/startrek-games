@@ -1,7 +1,7 @@
 /*
  *    scanners.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -37,7 +37,7 @@
 void
 scanners(void)
 {
-  register i;
+  register int i;
   int iFlag = TRUE;
   klingon klingon;
   starbase starbase = get_starbase();

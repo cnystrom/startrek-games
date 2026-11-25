@@ -1,7 +1,7 @@
 /*
  *    standard.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -30,10 +30,58 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "disk_io.h"
 #include "standard.h"
 
 int get_lkey(void);
+
+/* Read one line from stdin into s (at most size-1 chars), strip the
+   newline and discard the rest of an over-long line.  End of input
+   ends the game cleanly instead of looping forever. */
+
+void
+read_line(char *s, int size)
+{
+  char *nl;
+  int ch;
+
+  fflush(stdout);
+
+  if (fgets(s, size, stdin) == NULL)
+    {
+      printf("\n");
+      exit(0);
+    }
+
+  if ((nl = strchr(s, '\n')) != NULL)
+    *nl = '\0';
+  else
+    while ((ch = getchar()) != '\n' && ch != EOF)
+      ;
+}
+
+/* Prompt for a number.  Returns 1 and stores it in *d if the whole
+   reply is a finite number, otherwise returns 0. */
+
+int
+get_number(char *prompt, double *d)
+{
+  string s;
+  char *end;
+  double v;
+
+  get_string(prompt, s);
+  v = strtod(s, &end);
+  if (end == s)
+    return 0;
+  while (*end == ' ' || *end == '\t')
+    end++;
+  if (*end != '\0' || v != v || v > 1e9 || v < -1e9)
+    return 0;
+  *d = v;
+  return 1;
+}
 
 /* Get lowercase key */
 
@@ -43,13 +91,8 @@ get_lkey(void)
   int c;
   string s;
 
-  fflush(stdin);
-
-  gets(s);
-  c  = s[0];;
-
-  if (c < 97)
-    c = c + 32;
+  read_line(s, sizeof s);
+  c = tolower((unsigned char) s[0]);
 
   return c;
 }
@@ -61,12 +104,12 @@ y_or_n(char *s)
 {
   int c;
 
-  printf(s);
+  fputs(s, stdout);
   c = get_lkey();
 
   while (c != 'y' && c != 'n')
     {
-      printf(s);
+      fputs(s, stdout);
       c = get_lkey();
     }
 
@@ -113,29 +156,9 @@ itoa(int n, char s[])
 int
 get_string(char *s1, char *s2)
 {
-  int c, i, lim = MAXLEN;
-
-  printf(s1);
-
-  i = 0;
-
-  fflush(stdin);
-
-  c = getchar();
-
-  lim--;
-
-  if (c != '\n')
-    s2[i++] = c;
-  else  
-    s2[i++] = getchar();
-
-  while (--lim > 0 && (c = getchar()) != EOF && c != '\n')
-    s2[i++] = c;
-
-  s2[i] = '\0';
-
-  return i;
+  fputs(s1, stdout);
+  read_line(s2, MAXLEN);
+  return strlen(s2);
 }
 
 void
@@ -144,7 +167,7 @@ pause (void)
   string s;
 
   printf (" Hit ENTER or RETURN key to continue...");
-  gets(s);
+  read_line(s, sizeof s);
 }
 
 void
@@ -156,9 +179,9 @@ showfile(char *filename)
   if (openfile(filename, "r") != 0)
     return;
 
-  while (getline(lBuffer) != 0)
+  while (read_file_line(lBuffer) != 0)
     {
-      printf(lBuffer);
+      fputs(lBuffer, stdout);
       
       if (iRow++ > MAXROW - 3)
         {
@@ -196,6 +219,9 @@ s_rot(char *s1, int n)
 
   len = strlen(s1);
 
+  if (len == 0)
+    return(s1);
+
   n = (-n);
 
   if (n >= len)
@@ -207,8 +233,9 @@ s_rot(char *s1, int n)
       n += len;
     }
 
-  if ((tmp = strdup(s1)) == NULL)
+  if ((tmp = malloc(len + 1)) == NULL)
     return(NULL);
+  strcpy(tmp, s1);
 
   for (i = 0; i < len; i++)
     {

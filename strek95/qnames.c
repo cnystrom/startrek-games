@@ -1,7 +1,7 @@
 /*
  *    qnames.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -43,7 +43,7 @@ static char * sect_name[] = {""," I"," II"," III"," IV"};
 char *
 quadrant_name(int z4, int z5)
 {
-  string sG2;
+  static string sG2;
 
   if (z4 < 1 || z4 > NAME_LIMIT || z5 < 1 || z5 > NAME_LIMIT)
     return("Unknown");
@@ -65,12 +65,11 @@ char *
 map_name(int z4, int z5)
 {
   int len;
-  string sG2;
+  static string sG2;
 
   if (z4 < 1 || z4 > NAME_LIMIT || z5 < 1 || z5 > NAME_LIMIT)
     strcpy(sG2, "Unknown");
-
-  if (z5 <= 4)
+  else if (z5 <= 4)
     strcpy(sG2, quad_name[z4]);
   else
     strcpy(sG2, quad_name[z4+8]);

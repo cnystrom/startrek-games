@@ -1,7 +1,7 @@
 /*
  *    torps.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -34,6 +34,7 @@
 #include "standard.h"
 #include "galaxy.h"
 #include "space.h"
+#include "starbase.h"
 #include "ship.h"
 #include "klingon.h"
 #include "posit.h"
@@ -46,9 +47,9 @@
 void
 photon_torpedoes(void)
 {
-  register i, j;
-  int iCourse;
-  string s;
+  register int i, j;
+  int iCourse, iX, iY;
+  double d;
   posit posit, posP;
 
   if (damaged(PHOTON_TORPEDOES))
@@ -67,18 +68,13 @@ photon_torpedoes(void)
 
   course_display();
       
-  get_string("Torpedo Course: ", s);
-
-  printf("\n");
-
-  iCourse = atoi(s);
-
-  if (iCourse < 0 || iCourse > 360)
+  if (! get_number("Torpedo Course: ", &d) || d < 0 || d > 360)
     {
       printf("\nWeapons Officer reports:\n");
       printf("  Invalid torpedo course, sir.\n\n");
       return;
     }
+  iCourse = (int) d;
 
   sub_torpedo();
 
@@ -91,17 +87,22 @@ photon_torpedoes(void)
 
       posP = course_spd(posP, iCourse, 1);
 
-      if ((posit.iXQuad != posP.iXQuad) || (posit.iYQuad != posP.iYQuad))
+      /* Round to the nearest sector, as BASIC does (INT(X+.5)), so a
+         torpedo aimed straight at a target hits it.  Work relative to
+         the ship's quadrant so rounding across its edge is handled. */
+      iX = cint((posP.iXQuad - posit.iXQuad) * QUADSIZE + posP.fXSect);
+      iY = cint((posP.iYQuad - posit.iYQuad) * QUADSIZE + posP.fYSect);
+
+      if (iX < 1 || iX > QUADSIZE || iY < 1 || iY > QUADSIZE)
         {
           printf("  Torpedo Missed\n\n");
           return;
         }
       else
         {
+          printf("       %d %d\n", iX, iY);
 
-          printf("       %d %d\n", (int) posP.fXSect, (int) posP.fYSect); 
-
-          j = get_space((int) posP.fXSect, (int) posP.fYSect);
+          j = get_space(iX, iY);
 
           if (j != SPACE)
             {
@@ -111,8 +112,11 @@ photon_torpedoes(void)
                 {
 	          printf ("*** Station Destroyed ***\n\n");
 		  beep();
-                  sub_station_galaxy(posP.iXQuad, posP.iYQuad);
-                  sub_station_space((int) posP.fXSect, (int) posP.fYSect);
+                  sub_station_galaxy(posit.iXQuad, posit.iYQuad);
+                  /* del_starbase also forgets the base, so the ship
+                     can no longer dock at (or be shielded by) it */
+                  del_starbase(iX, iY);
+                  set_condition();
 		  demotion();
 		  sub_score(1000);
                 }
@@ -120,8 +124,8 @@ photon_torpedoes(void)
 	        {
                   printf ("*** Klingon Destroyed ***\n\n");
 		  beep();
-                  sub_ship_galaxy(posP.iXQuad, posP.iYQuad);
-                  del_klingon((int) posP.fXSect, (int) posP.fYSect);
+                  sub_ship_galaxy(posit.iXQuad, posit.iYQuad);
+                  del_klingon(iX, iY);
                   add_score(300);
 		  if (get_klingons_left() <= 0)
 		    won_game();

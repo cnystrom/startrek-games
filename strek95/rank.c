@@ -1,7 +1,7 @@
 /*
  *    rank.c
  *
- *    Super Star Trek 95 (v1.0)
+ *    Super Star Trek 95 (v1.1)
  *    Retro Star Trek Game 
  *    Copyright (C) 1995  <Chris Nystrom>
  * 
@@ -29,6 +29,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "standard.h"
 #include "rank.h"
 
@@ -74,7 +75,7 @@ get_name(void)
 void
 set_rank(int i)
 {
-  if (i >= 0 && i <= TOTAL_RANKS)
+  if (i >= 0 && i < TOTAL_RANKS)
     iRank = i;
 }
 
@@ -105,6 +106,7 @@ int
 show_ranks(void)
 {
   int i;
+  string s;
 
   printf("\n");
 
@@ -115,7 +117,8 @@ show_ranks(void)
 
   printf("\nSelect Rank: ");
 
-  i = getchar() - 48;
+  read_line(s, sizeof s);
+  i = atoi(s);
 
   return i;
 }
@@ -162,7 +165,7 @@ get_full_name(void)
 void
 print_full_name(void)
 {
-  printf(sFullName);
+  fputs(sFullName, stdout);
 }
 
 bool
