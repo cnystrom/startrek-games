@@ -33,6 +33,10 @@ games, kept so those are not duplicated as a second `startrek` repo.
   `.lib`, `.qlb`), binary `.DAT` data files, a binary `sship.doc`, and
   `qb.ini` were stripped. Source, include files, makefiles, batch files,
   and text documentation remain.
+  The main program is **Star Battles** (1990): STARBAT, SB, SB2 and
+  SBCREATE. Version 2.0 (2026) builds with QB64 Phoenix Edition on modern
+  systems; see "Star Battles 2.0" below. The 1990 originals are at the
+  git tag `starbas-1990`.
 
 ## Origin
 
@@ -88,4 +92,42 @@ See LICENSE for the terms of each tree in this repository.
   `make CC=gcc CFLAGS="-std=c89 -g"`.
 - **niotrek**: does not compile standalone; it expects NIO headers
   (`nio_lib.h`).
-- **starbas**: QuickBASIC / DOS sources; not compiled here.
+- **starbas**: Star Battles 2.0 builds with QB64 Phoenix Edition; see
+  below. The 1990 QuickBASIC 4.5 sources are at tag `starbas-1990`.
+
+## Star Battles 2.0 (2026, QB64 Phoenix Edition)
+
+Star Battles is Chris Nystrom's 1990 QuickBASIC 4.5 space fleet battle game.
+Version 2.0 ports it to QB64 Phoenix Edition, which is free and open source,
+so it builds and runs on Linux and Windows today (macOS should work too, but
+is untested). The code stays Chris's 1990 code. Each line the port had to
+change is kept as a `'PE` comment next to its replacement, and
+`starbas/PORTING.md` lists every change with its original line number. 2.0
+also fixes four bugs in the original:
+
+- Esc in the Weapons menu showed "' has been destroyed, sir." It now backs out.
+- In the scenario creator, a Side above 10 crashed the program. Side is now
+  1-10.
+- A stray quote in the scenario creator was removed.
+- The stardate now advances one per turn.
+
+Build (QB64-PE 4.7 or later from
+https://github.com/QB64-Phoenix-Edition/QB64pe/releases):
+
+- Linux or macOS: `cd starbas && QB64PE=/path/to/qb64pe ./build-qb64pe.sh game`
+- Windows: `cd starbas`, `set QB64PE=C:\path\to\qb64pe.exe`, then
+  `build-qb64pe.cmd game`
+
+Play: run `STARBAT` from the game folder for the title screen and
+instructions, which then loads the command processor (SB). Run `SBCREATE`
+first to build a scenario. It hands off to SB as "Creator": set things up,
+end the turn once, then **Save Game**. In a new session choose **Load Game**,
+press Enter at the Path prompt to use the game folder, type the scenario name,
+and assign fleets to players or the computer. Each player gives orders
+(sensors, Director targeting, weapons, navigation). **End Turn** runs SB2,
+which moves the ships, resolves combat and returns to SB. Use the arrow keys
+and Enter, or the mouse: move to highlight, click to choose. Esc or Quit
+backs out of menus.
+
+Prebuilt Windows and Linux downloads are attached to the GitHub release
+`starbas-2.0`, not stored in this repository.

@@ -4,6 +4,7 @@ GOTO start
 break:
    STOP
 start:
+'$INCLUDE: 'PE_CHAIN.BI'          ' QB64 port: CHAIN/COMMON emulation
 
 RANDOMIZE (TIMER)
 

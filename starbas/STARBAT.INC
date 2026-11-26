@@ -1,3 +1,5 @@
+$IF STARBAT_INC = UNDEFINED THEN
+$LET STARBAT_INC = DEFINED
 '$INCLUDE: 'STANDARD.INC'
 
 TYPE fleets
@@ -92,28 +94,54 @@ DECLARE SUB OwnPosit (i%, a3%, b3%, x3%, y3%)
 DECLARE SUB OwnCourse (i%, cse%, flag%)
 DECLARE SUB OwnVelocity (i%, vel%, minVel%, flag%)
 
-COMMON c%()
-COMMON control%()
-COMMON damge%()
-COMMON debug%
-COMMON direction%()
-COMMON distance%()
-COMMON fleet() AS fleets
-COMMON location$()
-COMMON message$()
-COMMON playerName$()
-COMMON progMode%
-COMMON q%()
-COMMON quadsize%
-COMMON ship() AS ships
-COMMON stardate%
-COMMON status%()
-COMMON totFleetNum%
-COMMON totPlayerNum%
-COMMON totshipnum%
-COMMON totsidenum%
-COMMON turn%
-COMMON m1  AS MenuType
+' QB64 port: COMMON arrays crash QB64-PE (heap corruption in its COMMON
+' support), and CHAIN is emulated by PE_CHAIN.BI, so each COMMON line is
+' kept as a comment and declared with DIM instead. SUBs still see these
+' through their own SHARED statements, exactly as before.
+'PE COMMON c%()
+DIM c%()
+'PE COMMON control%()
+DIM control%()
+'PE COMMON damge%()
+DIM damge%()
+'PE COMMON debug%
+DIM debug%
+'PE COMMON direction%()
+DIM direction%()
+'PE COMMON distance%()
+DIM distance%()
+'PE COMMON fleet() AS fleets
+DIM fleet() AS fleets
+'PE COMMON location$()
+DIM location$()
+'PE COMMON message$()
+DIM message$()
+'PE COMMON playerName$()
+DIM playerName$()
+'PE COMMON progMode%
+DIM progMode%
+'PE COMMON q%()
+DIM q%()
+'PE COMMON quadsize%
+DIM quadsize%
+'PE COMMON ship() AS ships
+DIM ship() AS ships
+'PE COMMON stardate%
+DIM stardate%
+'PE COMMON status%()
+DIM status%()
+'PE COMMON totFleetNum%
+DIM totFleetNum%
+'PE COMMON totPlayerNum%
+DIM totPlayerNum%
+'PE COMMON totshipnum%
+DIM totshipnum%
+'PE COMMON totsidenum%
+DIM totsidenum%
+'PE COMMON turn%
+DIM turn%
+'PE COMMON m1  AS MenuType
+DIM m1  AS MenuType
 
 CONST sectsize% = 10
 
@@ -186,4 +214,4 @@ CONST shipdock = 39
 
 '$INCLUDE: 'START.INC'
 
-
+$END IF

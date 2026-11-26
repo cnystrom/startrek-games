@@ -67,7 +67,8 @@ side$(4) = "Hasmurd"
 side$(5) = "Robotron"
 side$(6) = "Farnnic"
 side$(7) = "Chaldean"
-side$(8) = "Phesian"'
+'PE fix:side$(8) = "Phesian"'
+side$(8) = "Phesian"   ' PE fix: stray trailing quote removed
 side$(9) = "Hattian"
 side$(10) = "Alien"
  
@@ -163,7 +164,7 @@ FOR i = 1 TO starNum%
    xsect! = (sectSize% - 1) * RND + 1
    ysect! = (sectSize% - 1) * RND + 1
  
-   IF FRE(1) < 1100 THEN EXIT FOR
+'PE IF FRE(1) < 1100 THEN EXIT FOR   ' QB64 port: no FRE(1); DOS string-space check not needed
 
    a$ = SectorEncode$(255, xsect!, ysect!)
    location$(xquad%, yquad%) = location$(xquad%, yquad%) + a$
@@ -197,10 +198,10 @@ NEXT i
    
 FOR i = 1 TO totshipnum%
 
-   IF FRE(1) < 100 THEN
-      totshipnum% = i
-      EXIT FOR
-   END IF
+'PE IF FRE(1) < 100 THEN            ' QB64 port: no FRE(1); DOS string-space check not needed
+'PE    totshipnum% = i
+'PE    EXIT FOR
+'PE END IF
 
    CLS
    PRINT
@@ -211,8 +212,10 @@ FOR i = 1 TO totshipnum%
        
    DO
       LOCATE 4, 2
-      INPUT "Side (1-250)"; ship(i).side
-   LOOP WHILE ship(i).side < 1 OR ship(i).side > 250
+'PE fix:   INPUT "Side (1-250)"; ship(i).side
+'PE fix:LOOP WHILE ship(i).side < 1 OR ship(i).side > 250
+      INPUT "Side (1-10)"; ship(i).side      ' PE fix: side$() has 10 entries (Side 11+ crashed at the Side: line)
+   LOOP WHILE ship(i).side < 1 OR ship(i).side > UBOUND(side$)
 
    PRINT
    PRINT " The Known Races of the Galaxy:"
@@ -1276,7 +1279,8 @@ FOR i = 1 TO totshipnum%
 
 NEXT i
 
-CHAIN "SB"
+'PE CHAIN "SB"
+peTarget$ = "SB": GOSUB PEChain   ' QB64 port: CHAIN on every OS (see PE_CHAIN.BI)
 
 
 

@@ -368,7 +368,8 @@ SUB EndGame
       CLS
       LOCATE 2, 2
       PRINT "Preparing for new game..."
-      RUN "SB"
+'PE   RUN "SB"
+      CALL PELaunch("SB", "")   ' QB64 port: RUN "file" only works on Windows
    ELSE
       END
       FOR i = 1 TO totshipnum%
@@ -638,7 +639,8 @@ SUB SBLoad (a$)
    fileName$ = tempPath$ + "*.TMP"
    KILL fileName$
      
-   path$ = "A:\" + SPACE$(69)
+'PE path$ = "A:\" + SPACE$(69)
+   path$ = SPACE$(72)   ' QB64 port: default to the game folder, not floppy A:
    LOCATE 22, 2
    PRINT "Path: ";
    CALL FieldEditor(path$, 0)

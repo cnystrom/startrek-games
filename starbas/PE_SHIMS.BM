@@ -1,0 +1,65 @@
+'
+'   PE_SHIMS.BM  -  QB64 Phoenix Edition port shims (not part of the 1990 original)
+'
+'   Mouse    replaces the assembly Mouse routine from MIXED.LIB (INT 33h call).
+'   PELaunch starts another Star Battles program and ends this one; used by the
+'            CHAIN emulation (PE_CHAIN.BI) and in place of RUN "SB".
+'
+'   Mouse details:
+'   Only the two functions Star Battles uses are emulated:
+'      3  = button status and position (text-mode virtual pixels, 8 per cell)
+'     11  = motion counters (mickeys) since the last call
+'
+DEFINT A-Z
+SUB Mouse (m1%, m2%, m3%, m4%)
+   STATIC lastX%, lastY%, started%, b%
+   _LIMIT 240                   ' polling loops called this in a tight loop
+   ' b% latches clicks shorter than one poll until function 3 reports them
+   ev% = 0
+   DO WHILE _MOUSEINPUT
+      ev% = -1
+      IF _MOUSEBUTTON(1) THEN b% = b% OR 1
+      IF _MOUSEBUTTON(2) THEN b% = b% OR 2
+   LOOP
+   mx% = (_MOUSEX - 1) * 8: my% = (_MOUSEY - 1) * 8
+   ' take the first real mouse event as the reference point, so a pointer that
+   ' starts outside the new window does not look like a big move
+   IF started% = 0 THEN
+      lastX% = mx%: lastY% = my%
+      IF ev% THEN started% = -1
+   END IF
+   SELECT CASE m1%
+      CASE 3
+         m2% = b%: b% = 0
+         IF _MOUSEBUTTON(1) THEN m2% = m2% OR 1
+         IF _MOUSEBUTTON(2) THEN m2% = m2% OR 2
+         m3% = mx%: m4% = my%
+      CASE 11
+         m3% = mx% - lastX%: m4% = my% - lastY%
+         lastX% = mx%: lastY% = my%
+      CASE ELSE
+         ' other driver functions are not used by Star Battles
+   END SELECT
+END SUB
+
+SUB PELaunch (prog$, args$)
+   exe$ = COMMAND$(0)
+   p% = _INSTRREV(exe$, "/")
+   IF _INSTRREV(exe$, "\") > p% THEN p% = _INSTRREV(exe$, "\")
+   exe$ = LEFT$(exe$, p%) + UCASE$(prog$)
+   $IF WIN THEN
+      exe$ = exe$ + ".exe"
+   $END IF
+   IF _FILEEXISTS(exe$) = 0 THEN
+      PRINT
+      PRINT " Cannot find "; exe$
+      END
+   END IF
+   $IF WIN THEN
+      SHELL _DONTWAIT CHR$(34) + exe$ + CHR$(34) + args$
+   $ELSE
+      ' background it from the shell so no forked copy of this program lingers
+      SHELL CHR$(34) + exe$ + CHR$(34) + args$ + " &"
+   $END IF
+   SYSTEM
+END SUB

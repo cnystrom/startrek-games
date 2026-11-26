@@ -122,5 +122,6 @@ END IF
 
 LOCATE 22, 2
 PRINT "Loading Star Battles Command Processor..."
-CHAIN "SB"
+'PE CHAIN "SB"
+peTarget$ = "SB": GOSUB PEChain   ' QB64 port: CHAIN on every OS (see PE_CHAIN.BI)
 

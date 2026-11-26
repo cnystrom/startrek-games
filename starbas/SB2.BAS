@@ -37,7 +37,8 @@ LOCATE 2, 2
 PRINT "Completed Processing Moves."
 PRINT
 PRINT " Loading Command Processor..."
-CHAIN "SB"
+'PE CHAIN "SB"
+peTarget$ = "SB": GOSUB PEChain   ' QB64 port: CHAIN on every OS (see PE_CHAIN.BI)
 
 REM $DYNAMIC
 SUB DamageShip (shipNum%, target%, d%)
@@ -1443,6 +1444,7 @@ SUB ProcessMoves
    SHARED status%()
    SHARED totShipNum%
    SHARED turn%
+   SHARED stardate%   ' PE fix: needed to advance the stardate below
 
    CLS
    LOCATE 2, 2
@@ -1472,6 +1474,7 @@ SUB ProcessMoves
    LOCATE 2, 2
    PRINT "Processing Messages..."
    turn% = turn% + 1
+   stardate% = stardate% + 1   ' PE fix: one stardate per turn (was never advanced)
    shipNum% = 0
   
    tempPath$ = ENVIRON$("TMP")

@@ -53,7 +53,8 @@ DECLARE SUB TorpCalc2 (shipNum%, b%)
 CLS
 LOCATE 2, 2
 PRINT "Loading Moves Processor..."
-CHAIN "SB2"
+'PE CHAIN "SB2"
+peTarget$ = "SB2": GOSUB PEChain   ' QB64 port: CHAIN on every OS (see PE_CHAIN.BI)
 
 REM $DYNAMIC
 SUB ChooseFleet (playerNum%)
@@ -2410,8 +2411,9 @@ SUB SelectWeapons (shipNum%)
       CALL MouseMenu(m1, m1Text$(), m1Title$, m1Prompt$)
       COLOR white, blue, lightblue
  
-      IF selection% = 0 THEN selection% = x% + 1
+'PE fix:   IF selection% = 0 THEN selection% = x% + 1
       selection% = m1.returnCode
+      IF selection% = 0 THEN selection% = x% + 1   ' PE fix: Esc (0) = Quit; check must follow the assignment
       temp% = m1.returnCode
 
       IF selection% <> x% + 1 THEN
