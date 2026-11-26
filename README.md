@@ -35,7 +35,9 @@ versions or other games.
   1.2.
 - **niotrek/** — An NIO port of Super Star Trek Classic (v1.1),
   copyright 2002, from the hallie source archive. It includes
-  `nio_lib.h` and is not a standalone terminal program.
+  `nio_lib.h` and is not a standalone terminal program. A related
+  NIO demo, also named `startrek.c`, is in the nio-jukebox repo at
+  `nio/nio_demo_apps/startrek.c`.
 - **starbas/** — BASIC source for Chris's "Starbase" / Star Trek-related
   QuickBASIC programs, from the hallie archive. Binaries (`.exe`,
   `.lib`, `.qlb`), binary `.DAT` data files, a binary `sship.doc`, and
