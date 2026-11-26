@@ -2,10 +2,12 @@
 
 Chris Nystrom's Star Trek game sources, grouped in one place.
 
-This repo does **not** replace the already-published v1.1 tree at
-https://github.com/cnystrom/startrek (sha256 of that `startrek.c` starts
-`1c7b20569f1a4b74...`). The copies here are other versions or other
-games, kept so those are not duplicated as a second `startrek` repo.
+The maintained Super Star Trek Classic is version 1.2 at
+https://github.com/cnystrom/startrek (tag `v1.2`).
+
+The classic copies in this repo are historical and are kept as they
+were. They are not the maintained tree. The other folders are other
+versions or other games.
 
 ## What's in here
 
@@ -20,11 +22,15 @@ games, kept so those are not duplicated as a second `startrek` repo.
 - **startrek-classic-v1.0/** — Super Star Trek Classic (v1.0), the 1996
   C port as published on cactus.org and as packed in `startrek.tgz`.
   This tree is byte-identical to the `startrek.tgz` on the old programs
-  site and to the copy in the hallie source archive.
+  site and to the copy in the hallie source archive. Historical copy,
+  kept as it was; see `HISTORY.md`. The maintained version is startrek
+  1.2 at https://github.com/cnystrom/startrek.
 - **startrek-classic-v1.1-cactus-2006/** — Super Star Trek Classic (v1.1)
   as it appeared as `startrek.c` on the old site. This is labeled v1.1
-  in the header, but it is **not** the same file as the already-published
-  GitHub repo (39708 bytes here vs 41660 bytes there).
+  in the header, but it is **not** the same file as the v1.1 later
+  published at https://github.com/cnystrom/startrek. Historical copy,
+  kept as it was; see `HISTORY.md`. The maintained version is startrek
+  1.2.
 - **niotrek/** — An NIO port of Super Star Trek Classic (v1.1),
   copyright 2002, from the hallie source archive. It includes
   `nio_lib.h` and is not a standalone terminal program.
@@ -82,8 +88,10 @@ See LICENSE for the terms of each tree in this repository.
 ## Build
 
 - **startrek-classic-v1.0** and **startrek-classic-v1.1-cactus-2006**:
-  default gcc and `-std=gnu89` fail on a modern system because the
-  program defines its own `getline`. Both build with
+  historical copies, kept as they were. For a maintained build, use
+  startrek 1.2 (https://github.com/cnystrom/startrek).
+  Default gcc and `-std=gnu89` fail on a modern system because the
+  program defines its own `getline`. Both historical trees build with
   `gcc -std=c89 -O0 startrek.c -o startrek -lm`. There are warnings
   about the old `gets()` calls. The code was not modified.
 - **strek95** (v1.1): `make` builds it with `cc`. It compiles cleanly
