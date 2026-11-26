@@ -16,9 +16,11 @@ versions or other games.
   total re-write in C of the Super Star Trek game from David Ahl's
   *BASIC Computer Games* (1978), with added features such as impulse
   engines, ranks, and sound. Sources are dated 1995. Now at v1.1, a
-  bug-fix release (see `strek95/README` for the changes). The original
-  1995 code, byte-identical to the `strek95.tgz` on the old programs
-  site, is preserved at the git tag `strek95-orig`.
+  bug-fix release (see `strek95/README` for the changes), plus a 2026
+  Windows build fix (Chris's `itoa` helper was renamed so mingw can
+  compile it). The original 1995 code, byte-identical to the
+  `strek95.tgz` on the old programs site, is preserved at the git tag
+  `strek95-orig`.
 - **startrek-classic-v1.0/** — Super Star Trek Classic (v1.0), the 1996
   C port as published on cactus.org and as packed in `startrek.tgz`.
   This tree is byte-identical to the `startrek.tgz` on the old programs
@@ -95,7 +97,8 @@ See LICENSE for the terms of each tree in this repository.
   `gcc -std=c89 -O0 startrek.c -o startrek -lm`. There are warnings
   about the old `gets()` calls. The code was not modified.
 - **strek95** (v1.1): `make` builds it with `cc`. It compiles cleanly
-  with gcc and clang in C89 and default modes. The original 1995 tree
+  with gcc and clang in C89 and default modes. A Windows .exe builds
+  with `make CC=x86_64-w64-mingw32-gcc`. The original 1995 tree
   (tag `strek95-orig`) named the compiler `acc` and needs
   `make CC=gcc CFLAGS="-std=c89 -g"`.
 - **niotrek**: does not compile standalone; it expects NIO headers

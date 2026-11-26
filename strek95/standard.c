@@ -131,8 +131,9 @@ reverse(char s[])
 }
 
 /* convert n to characters in s */
+/* FIX (2026): renamed from itoa; the name clashes with Microsoft's itoa on Windows. */
 void
-itoa(int n, char s[])
+int_to_str(int n, char s[])
 {
   int i, sign;
 

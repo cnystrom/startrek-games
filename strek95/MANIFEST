@@ -189,7 +189,7 @@ srs.c -        Short range sensors
 
 standard.c -   Standard IO routines
   y_or_n
-  itoa
+  int_to_str
   get_string
   pause
   showfile

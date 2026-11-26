@@ -38,6 +38,16 @@ Changes in v1.1:
  - Builds cleanly with modern gcc and clang (C89 through C23); the
    Makefile now uses "cc" instead of "acc".
 
+Windows build (2026):
+
+ - Chris's helper itoa() was renamed to int_to_str(). The name clashed
+   with the itoa in Microsoft's C library (different arguments and
+   return type), so the game would not build with mingw or MSVC. The
+   game itself does not call this helper.
+ - A Windows .exe builds with MinGW-w64:
+     make CC=x86_64-w64-mingw32-gcc
+   Run startrek.exe from the same folder as instruct.doc and COPYING.
+
 Original README follows.
 ----------------------------------------------------------------------
 

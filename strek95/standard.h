@@ -95,7 +95,9 @@ typedef char string[MAXLEN];
 /* Standard function definitions */
 
 int y_or_n(char *s);
-void itoa(int n, char s[]);
+/* FIX (2026): renamed from itoa; that name clashes with Microsoft's
+   itoa (char *itoa(int, char *, int)) and breaks mingw/MSVC builds. */
+void int_to_str(int n, char s[]);
 int get_string(char *s1, char *s2);
 void read_line(char *s, int size);
 int get_number(char *prompt, double *d);
